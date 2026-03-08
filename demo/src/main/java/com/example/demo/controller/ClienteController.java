@@ -31,6 +31,6 @@ public class ClienteController {
 
     @PostMapping
     public Cliente crearCliente(@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+        return clienteRepository.save(cliente);  //esto es a la vuelta (bbdd, entity, service, dto, controller, json, cliente), por eso usa el metodo save
     }
 }
