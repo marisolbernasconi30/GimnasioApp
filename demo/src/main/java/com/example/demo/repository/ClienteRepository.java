@@ -1,19 +1,11 @@
 package com.example.demo.repository;
 
-import java.util.List;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.Cliente;
 
-public class ClienteRepository {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> { 
 
-    public List<Cliente> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
-    }
-
-    public Cliente save(Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
-
+    // JpaRepository es una interfaz de Spring Data JPA que proporciona métodos CRUD predefinidos.
+    // Al extender JpaRepository, ClienteRepository hereda métodos como save(), findAll(), findById(), deleteById(), etc.
+    // El primer parámetro (Cliente) es la entidad que maneja el repositorio y el segundo parámetro (Long) es el tipo de dato del ID de la entidad.
 }
