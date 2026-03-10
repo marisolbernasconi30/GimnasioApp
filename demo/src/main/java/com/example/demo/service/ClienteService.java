@@ -34,7 +34,11 @@ public class ClienteService {
             .orElseThrow(() -> new RuntimeException("Cliente no encontrado")); // Si no se encuentra, lanza una excepción
 
     cliente.setNombre(clienteActualizado.getNombre()); // Actualiza el nombre del cliente con el nuevo valor
-    cliente.setEdad(clienteActualizado.getEdad()); // Actualiza la edad del cliente con el nuevo valor
+    cliente.setApellido(clienteActualizado.getApellido());
+    cliente.setEdad(clienteActualizado.getEdad());
+    cliente.setCelular(clienteActualizado.getCelular());
+    cliente.setDomicilio(clienteActualizado.getDomicilio());
+    cliente.setLesion(clienteActualizado.getLesion());
 
     return clienteRepository.save(cliente); // Guarda el cliente actualizado en la base de datos y lo devuelve
     }
