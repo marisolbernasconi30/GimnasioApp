@@ -21,6 +21,8 @@ public class Cliente {
     private String domicilio;
     private String lesion;
 
+    private boolean activo = true;
+
     // Constructor vacío (OBLIGATORIO para JPA)
     public Cliente() {
     }
@@ -91,6 +93,11 @@ public class Cliente {
 
     public void setLesion(String lesion) {
         this.lesion = lesion;
+    }
+
+    public void setActivo(boolean b) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setActivo'");
     }
 }
 

@@ -10,37 +10,42 @@ import com.example.demo.repository.ClienteRepository;
 @Service
 public class ClienteService {
 
-    private final ClienteRepository clienteRepository; // Variable de instancia para el repositorio de clientes
+    private final ClienteRepository clienteRepository;
 
-    public ClienteService(ClienteRepository clienteRepository){ // Constructor que recibe el repositorio de clientes
-        this.clienteRepository = clienteRepository; // Asigna el repositorio a la variable de instancia para su uso en los métodos del servicio
+    public ClienteService(ClienteRepository clienteRepository){
+        this.clienteRepository = clienteRepository;
     }
 
-    public List<Cliente> listar(){ // Método para listar todos los clientes
-        return clienteRepository.findAll(); // Devuelve una lista de todos los clientes utilizando el método findAll del repositorio
+    public List<Cliente> listar(){
+        return clienteRepository.findByActivoTrue();
     }
 
-    public Cliente crear(Cliente cliente){ // Método para crear un nuevo cliente
-        return clienteRepository.save(cliente); // Guarda el cliente en la base de datos utilizando el método save del repositorio y lo devuelve
+    public Cliente crear(Cliente cliente){
+        return clienteRepository.save(cliente);
     }
 
-    public void eliminar(Long id){ // Método para eliminar un cliente por su ID
-        clienteRepository.deleteById(id); // Elimina el cliente de la base de datos utilizando el método deleteById del repositorio
+    public Cliente darDeBaja(Long id){
+
+        Cliente cliente = clienteRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        cliente.setActivo(false);
+
+        return clienteRepository.save(cliente);
     }
 
-   public Cliente actualizar(Long id, Cliente clienteActualizado) { // Método para actualizar un cliente existente
+    public Cliente actualizar(Long id, Cliente clienteActualizado){
 
-    Cliente cliente = clienteRepository.findById(id) // Busca el cliente por su ID
-            .orElseThrow(() -> new RuntimeException("Cliente no encontrado")); // Si no se encuentra, lanza una excepción
+        Cliente cliente = clienteRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
-    cliente.setNombre(clienteActualizado.getNombre()); // Actualiza el nombre del cliente con el nuevo valor
-    cliente.setApellido(clienteActualizado.getApellido());
-    cliente.setEdad(clienteActualizado.getEdad());
-    cliente.setCelular(clienteActualizado.getCelular());
-    cliente.setDomicilio(clienteActualizado.getDomicilio());
-    cliente.setLesion(clienteActualizado.getLesion());
+        cliente.setNombre(clienteActualizado.getNombre());
+        cliente.setApellido(clienteActualizado.getApellido());
+        cliente.setEdad(clienteActualizado.getEdad());
+        cliente.setCelular(clienteActualizado.getCelular());
+        cliente.setDomicilio(clienteActualizado.getDomicilio());
+        cliente.setLesion(clienteActualizado.getLesion());
 
-    return clienteRepository.save(cliente); // Guarda el cliente actualizado en la base de datos y lo devuelve
+        return clienteRepository.save(cliente);
     }
 }
-

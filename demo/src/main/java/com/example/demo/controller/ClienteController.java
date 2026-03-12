@@ -50,22 +50,32 @@ public class ClienteController {
         return clienteService.crear(cliente);
     }
 
-    @DeleteMapping("/{id}") 
+    
+
+    @PutMapping("/{id}/baja")
+public Cliente darDeBaja(@PathVariable Long id){
+    return clienteService.darDeBaja(id);
+}
+
+
+
+
+    //@DeleteMapping("/{id}") 
     // Maneja peticiones HTTP DELETE.
     // Se usa para ELIMINAR un recurso.
     // Endpoint resultante: DELETE /clientes/{id}
-    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id){
+    //public ResponseEntity<Void> eliminarCliente(@PathVariable Long id){
 
         // @PathVariable toma el valor de la URL.
         // Ejemplo: DELETE /clientes/5
         // id = 5
 
-        clienteService.eliminar(id);
+        //clienteService.eliminar(id);
 
         // ResponseEntity permite controlar la respuesta HTTP.
         // noContent() devuelve un status 204 (eliminado correctamente, sin body).
-        return ResponseEntity.noContent().build();
-    }
+        //return ResponseEntity.noContent().build();
+   // }
 
     @PutMapping("/{id}")
     // Maneja peticiones HTTP PUT.
