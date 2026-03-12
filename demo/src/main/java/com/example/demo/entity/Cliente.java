@@ -95,9 +95,12 @@ public class Cliente {
         this.lesion = lesion;
     }
 
-    public void setActivo(boolean b) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setActivo'");
+    public boolean isActivo() {
+    return activo;
+    }
+
+    public void setActivo(boolean activo) {
+     this.activo = activo;
     }
 }
 
