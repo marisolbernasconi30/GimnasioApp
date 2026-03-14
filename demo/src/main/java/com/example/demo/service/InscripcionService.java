@@ -41,8 +41,7 @@ public class InscripcionService {
     }
 
     public List<Inscripcion> listar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listar'");
+       return inscripcionRepository.findByActivaTrue();
     }
 
     //para obtener la lista por id
