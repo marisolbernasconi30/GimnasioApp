@@ -37,9 +37,9 @@ public class InscripcionController {
   //GET /inscripciones/cliente/{id}
 
   
-@GetMapping("/cliente/{id}")
-public List<Inscripcion> obtenerInscripcionesCliente(@PathVariable Long id){
-    return inscripcionService.obtenerInscripcionesCliente(id);
+@GetMapping("/cliente/{clienteId}")
+public List<Inscripcion> obtenerInscripcionesCliente(@PathVariable Long clienteId){
+    return inscripcionService.obtenerInscripcionesCliente(clienteId);
 }
 
 

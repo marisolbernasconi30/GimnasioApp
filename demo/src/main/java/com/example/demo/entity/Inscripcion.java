@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import java.time.LocalDate;
 
 import com.example.demo.entity.enums.TipoEntrenamiento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 
@@ -14,9 +15,11 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+   @JsonBackReference
+   @ManyToOne
+   @JoinColumn(name = "cliente_id")
+   private Cliente cliente;
+
 
     @Enumerated(EnumType.STRING)
     private TipoEntrenamiento tipoEntrenamiento;

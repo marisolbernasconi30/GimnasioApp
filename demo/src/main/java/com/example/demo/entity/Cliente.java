@@ -1,9 +1,14 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +27,10 @@ public class Cliente {
     private String lesion;
 
     private boolean activo = true;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "cliente")
+    private List<Inscripcion> inscripciones;
 
     // Constructor vacío (OBLIGATORIO para JPA)
     public Cliente() {
