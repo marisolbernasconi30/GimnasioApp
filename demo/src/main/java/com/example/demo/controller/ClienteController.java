@@ -48,6 +48,7 @@ public class ClienteController {
 
     // PUT /clientes/{id}/baja
     // Da de baja al cliente (baja lógica, no se elimina de la base)
+    // se supone que además de dar de baja el cliente, tambien doy de baja sus inscripciones
     @PutMapping("/{id}/baja")
     public Cliente darDeBaja(@PathVariable Long id){
         return clienteService.darDeBaja(id);
