@@ -12,4 +12,6 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
 
     List<Inscripcion> findByClienteId(Long clienteId); //esto es para obtener la lista por id
 
+    List<Inscripcion> findByActivaFalse(); //esto es para obtener la lista de inscripciones inactivas
+
 }

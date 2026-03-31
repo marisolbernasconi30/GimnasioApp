@@ -58,4 +58,8 @@ public class InscripcionService {
 
         return inscripcionRepository.save(inscripcion);
     }
+
+    public List<Inscripcion> listarInscripInac() {
+        return inscripcionRepository.findByActivaFalse();
+    }
 }

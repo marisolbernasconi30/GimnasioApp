@@ -20,10 +20,16 @@ public class InscripcionController {
     }
 
     // GET /inscripciones
-    // Lista inscripciones activas
+    // Lista inscripciones ACTIVAS 
     @GetMapping
     public List<Inscripcion> listar(){
         return inscripcionService.listar();
+    }
+
+     // Lista inscripciones INACTIVAS 
+    @GetMapping ("/inactivas")
+    public List<Inscripcion> listarInscripInac(){
+        return inscripcionService.listarInscripInac();
     }
 
     // POST /inscripciones
