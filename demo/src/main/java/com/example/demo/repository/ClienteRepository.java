@@ -11,6 +11,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     // Al extender JpaRepository, ClienteRepository hereda métodos como save(), findAll(), findById(), deleteById(), etc.
     // El primer parámetro (Cliente) es la entidad que maneja el repositorio y el segundo parámetro (Long) es el tipo de dato del ID de la entidad.
 
-List<Cliente> findByActivoTrue();
+List<Cliente> findByActivoTrue(); //metodo para listar los clientes de alta 
+
+List<Cliente> findByActivoFalse(); //metodo para listar los clientes de baja
 
 }

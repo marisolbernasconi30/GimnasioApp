@@ -26,6 +26,13 @@ public class ClienteService {
     public List<Cliente> listar(){
         return clienteRepository.findByActivoTrue();
     }
+
+    public List<Cliente> listarBaja(){
+        return clienteRepository.findByActivoFalse();
+    }
+
+
+
     public Cliente crear(Cliente cliente){
         return clienteRepository.save(cliente);
     }

@@ -19,10 +19,17 @@ public class ClienteController {
     }
 
     // GET /clientes
-    // Devuelve la lista de clientes activos
+    // Devuelve la lista de clientes ACTIVOS 
     @GetMapping
     public List<Cliente> listarClientes(){
         return clienteService.listar();
+    }
+
+
+       // Devuelve la lista de clientes INACTIVOS 
+    @GetMapping("/baja")
+    public List<Cliente> listarClientesBaja(){
+        return clienteService.listarBaja();
     }
 
     // GET /clientes/{id}
