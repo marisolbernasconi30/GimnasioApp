@@ -21,6 +21,7 @@ public class Cliente {
 
     private String nombre;
     private String apellido;
+    private int dni;
     private int edad;
     private String celular;
     private String domicilio;
@@ -37,9 +38,10 @@ public class Cliente {
     }
 
     // Constructor sin ID (buena práctica)
-    public Cliente(String nombre, String apellido, int edad, String celular, String domicilio, String lesion) {
+    public Cliente(String nombre, String apellido, int dni, int edad, String celular, String domicilio, String lesion) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.dni = dni;
         this.edad = edad;
         this.celular = celular;
         this.domicilio = domicilio;
@@ -70,6 +72,14 @@ public class Cliente {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public int getDni(){
+         return dni; 
+    }
+
+    public void setDni(int dni){
+        this.dni = dni;
     }
 
     public int getEdad() {
