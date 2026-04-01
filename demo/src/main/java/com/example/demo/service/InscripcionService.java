@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.InscripcionDTO;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Inscripcion;
+import com.example.demo.entity.enums.TipoEntrenamiento;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.InscripcionRepository;
 
@@ -53,27 +54,27 @@ public class InscripcionService {
 //-------------------------------------
 
     public List<Inscripcion> listarMusculacion() {
-        return inscripcionRepository.findByTipoEntrenamientoMusculacion("MUSCULACION");
+        return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.MUSCULACION);
     }
 
     public List<Inscripcion> listarCardio() {
-        return inscripcionRepository.findByTipoEntrenamientoCardio("CARDIO");
+        return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.CARDIO);
     }
 
     public List<Inscripcion> listarFuncional() {
-     return inscripcionRepository.findByTipoEntrenamientoFuncional("FUNCIONAL");
+     return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.FUNCIONAL);
     }
 
     public List<Inscripcion> listarCrossfit() {
-      return inscripcionRepository.findByTipoEntrenamientoCrossfit("CROSSFIT");
+      return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.CROSSFIT);
     }
 
     public List<Inscripcion> listarYoga() {
-     return inscripcionRepository.findByTipoEntrenamientoYoga("YOGA");
+     return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.YOGA);
     }
 
     public List<Inscripcion> listarPilates() {
-     return inscripcionRepository.findByTipoEntrenamientoPilates("PILATES");
+     return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.PILATES);
     }
 
 

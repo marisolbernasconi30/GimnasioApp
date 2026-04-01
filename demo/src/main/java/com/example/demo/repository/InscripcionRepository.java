@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.Inscripcion;
+import com.example.demo.entity.enums.TipoEntrenamiento;
+
 
 
 public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> {
@@ -15,16 +17,8 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
 
     List<Inscripcion> findByActivaFalse(); //esto es para obtener la lista de inscripciones inactivas
 
-    List<Inscripcion> findByTipoEntrenamientoMusculacion(String tipoEntrenamiento); //esto es para obtener la lista por tipo de entrenamiento
+    List<Inscripcion> findByTipoEntrenamiento(TipoEntrenamiento tipoEntrenamiento); //esto es para obtener la lista por tipo de entrenamiento
 
-    List<Inscripcion> findByTipoEntrenamientoCardio(String tipoEntrenamiento);
-
-    List<Inscripcion> findByTipoEntrenamientoFuncional(String tipoEntrenamiento);
-
-    List<Inscripcion> findByTipoEntrenamientoCrossfit(String tipoEntrenamiento);
-
-    List<Inscripcion> findByTipoEntrenamientoYoga(String tipoEntrenamiento);
-
-    List<Inscripcion> findByTipoEntrenamientoPilates(String tipoEntrenamiento);
+ 
 
 }
