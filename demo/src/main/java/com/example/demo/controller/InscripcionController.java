@@ -8,6 +8,7 @@ import com.example.demo.dto.InscripcionDTO;
 import com.example.demo.entity.Inscripcion;
 import com.example.demo.service.InscripcionService;
 
+
 @RestController
 @RequestMapping("/inscripciones")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -31,6 +32,47 @@ public class InscripcionController {
     public List<Inscripcion> listarInscripInac(){
         return inscripcionService.listarInscripInac();
     }
+
+//-------------------------------------
+ // Lista inscripciones MUSCULACION 
+    @GetMapping ("/musculacion")
+    public List<Inscripcion> listarMusculacion(){
+        return inscripcionService.listarMusculacion();
+    }
+
+     // Lista inscripciones CARDIO 
+    @GetMapping ("/cardio")
+    public List<Inscripcion> listarCardio(){
+        return inscripcionService.listarCardio();
+    }
+
+ // Lista inscripciones FUNCIONAL 
+    @GetMapping ("/funcional")
+    public List<Inscripcion> listarFuncional(){
+        return inscripcionService.listarFuncional();
+    }
+
+     // Lista inscripciones CROSSFIT 
+    @GetMapping ("/crossfit")
+    public List<Inscripcion> listarCrossfit(){
+        return inscripcionService.listarCrossfit();
+    }
+
+     // Lista inscripciones YOGA 
+    @GetMapping ("/yoga")
+    public List<Inscripcion> listarYoga(){
+        return inscripcionService.listarYoga();
+    }
+
+     // Lista inscripciones PILATES 
+    @GetMapping ("/pilates")
+    public List<Inscripcion> listarPilates(){
+        return inscripcionService.listarPilates();
+    }
+
+
+//--------------------------------------
+
 
     // POST /inscripciones
     // Crea una nueva inscripción

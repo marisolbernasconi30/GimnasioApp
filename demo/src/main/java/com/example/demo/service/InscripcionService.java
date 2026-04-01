@@ -10,6 +10,7 @@ import com.example.demo.entity.Inscripcion;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.InscripcionRepository;
 
+
 @Service
 public class InscripcionService {
 
@@ -48,6 +49,36 @@ public class InscripcionService {
     public List<Inscripcion> obtenerInscripcionesCliente(Long clienteId) {
         return inscripcionRepository.findByClienteId(clienteId);
     }
+
+//-------------------------------------
+
+    public List<Inscripcion> listarMusculacion() {
+        return inscripcionRepository.findByTipoEntrenamientoMusculacion("MUSCULACION");
+    }
+
+    public List<Inscripcion> listarCardio() {
+        return inscripcionRepository.findByTipoEntrenamientoCardio("CARDIO");
+    }
+
+    public List<Inscripcion> listarFuncional() {
+     return inscripcionRepository.findByTipoEntrenamientoFuncional("FUNCIONAL");
+    }
+
+    public List<Inscripcion> listarCrossfit() {
+      return inscripcionRepository.findByTipoEntrenamientoCrossfit("CROSSFIT");
+    }
+
+    public List<Inscripcion> listarYoga() {
+     return inscripcionRepository.findByTipoEntrenamientoYoga("YOGA");
+    }
+
+    public List<Inscripcion> listarPilates() {
+     return inscripcionRepository.findByTipoEntrenamientoPilates("PILATES");
+    }
+
+
+//-------------------------------------
+
 
     //para cancelar la inscripcion
     public Inscripcion cancelar(Long id) {
