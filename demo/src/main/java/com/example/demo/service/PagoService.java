@@ -10,6 +10,7 @@ import com.example.demo.entity.Pago;
 import com.example.demo.repository.InscripcionRepository;
 import com.example.demo.repository.PagoRepository;
 
+
 @Service
 public class PagoService {
 
@@ -39,9 +40,10 @@ public class PagoService {
         return pagoRepository.save(pago);
     }
 
-    // listar pagos de una inscripcion
+    // listar pagos de una inscripcion FILTRAR POR ID DE ESA INSCRIPCION
     public List<Pago> pagosPorInscripcion(Long inscripcionId){
         return pagoRepository.findByInscripcionId(inscripcionId);
     }
 
+    
 }

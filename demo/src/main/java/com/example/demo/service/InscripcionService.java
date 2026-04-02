@@ -53,30 +53,15 @@ public class InscripcionService {
 
 //-------------------------------------
 
-    public List<Inscripcion> listarMusculacion() {
-        return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.MUSCULACION);
+    
+
+   public List<Inscripcion> listarActivasPorTipo(TipoEntrenamiento tipo) {
+        return inscripcionRepository.findByTipoEntrenamientoAndActivaTrue(tipo);
     }
 
-    public List<Inscripcion> listarCardio() {
-        return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.CARDIO);
+    public List<Inscripcion> listarInactivasPorTipo(TipoEntrenamiento tipo) {
+        return inscripcionRepository.findByTipoEntrenamientoAndActivaFalse(tipo);
     }
-
-    public List<Inscripcion> listarFuncional() {
-     return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.FUNCIONAL);
-    }
-
-    public List<Inscripcion> listarCrossfit() {
-      return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.CROSSFIT);
-    }
-
-    public List<Inscripcion> listarYoga() {
-     return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.YOGA);
-    }
-
-    public List<Inscripcion> listarPilates() {
-     return inscripcionRepository.findByTipoEntrenamiento(TipoEntrenamiento.PILATES);
-    }
-
 
 //-------------------------------------
 
@@ -91,7 +76,7 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
-    public List<Inscripcion> listarInscripInac() {
+    public List<Inscripcion> listarInscripInac() { //ME DEVUELVE TODAS LAS INSCRIPCIONES INACTIVAS 
         return inscripcionRepository.findByActivaFalse();
     }
 }

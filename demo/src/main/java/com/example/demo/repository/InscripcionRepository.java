@@ -17,8 +17,7 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
 
     List<Inscripcion> findByActivaFalse(); //esto es para obtener la lista de inscripciones inactivas
 
-    List<Inscripcion> findByTipoEntrenamiento(TipoEntrenamiento tipoEntrenamiento); //esto es para obtener la lista por tipo de entrenamiento
+     List<Inscripcion> findByTipoEntrenamientoAndActivaTrue(TipoEntrenamiento tipoEntrenamiento); //ME TRAE LOS ACTIVOS DE CADA ENTRENAMIENTO
 
- 
-
+    List<Inscripcion> findByTipoEntrenamientoAndActivaFalse(TipoEntrenamiento tipoEntrenamiento); //ME TRAE LOS INACTIVOS DE CADA ENTRENAMIENTO
 }

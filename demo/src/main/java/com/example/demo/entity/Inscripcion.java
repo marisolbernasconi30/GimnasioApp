@@ -26,7 +26,7 @@ public class Inscripcion {
 
     private LocalDate fechaInicio;
 
-    private boolean activa = true;
+    private boolean activa = true;   
 
     public Inscripcion() {}
 

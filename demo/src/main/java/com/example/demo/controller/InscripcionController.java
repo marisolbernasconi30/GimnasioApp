@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.InscripcionDTO;
 import com.example.demo.entity.Inscripcion;
+import com.example.demo.entity.enums.TipoEntrenamiento;
 import com.example.demo.service.InscripcionService;
 
 
@@ -34,41 +35,18 @@ public class InscripcionController {
     }
 
 //-------------------------------------
- // Lista inscripciones MUSCULACION 
-    @GetMapping ("/musculacion")
-    public List<Inscripcion> listarMusculacion(){
-        return inscripcionService.listarMusculacion();
+ 
+  
+    @GetMapping("/tipo/{tipo}/activas")
+    public List<Inscripcion> listarActivasPorTipo(@PathVariable TipoEntrenamiento tipo) {
+        return inscripcionService.listarActivasPorTipo(tipo);
     }
 
-     // Lista inscripciones CARDIO 
-    @GetMapping ("/cardio")
-    public List<Inscripcion> listarCardio(){
-        return inscripcionService.listarCardio();
+    @GetMapping("/tipo/{tipo}/inactivas")
+    public List<Inscripcion> listarInactivasPorTipo(@PathVariable TipoEntrenamiento tipo) {
+        return inscripcionService.listarInactivasPorTipo(tipo);
     }
-
- // Lista inscripciones FUNCIONAL 
-    @GetMapping ("/funcional")
-    public List<Inscripcion> listarFuncional(){
-        return inscripcionService.listarFuncional();
-    }
-
-     // Lista inscripciones CROSSFIT 
-    @GetMapping ("/crossfit")
-    public List<Inscripcion> listarCrossfit(){
-        return inscripcionService.listarCrossfit();
-    }
-
-     // Lista inscripciones YOGA 
-    @GetMapping ("/yoga")
-    public List<Inscripcion> listarYoga(){
-        return inscripcionService.listarYoga();
-    }
-
-     // Lista inscripciones PILATES 
-    @GetMapping ("/pilates")
-    public List<Inscripcion> listarPilates(){
-        return inscripcionService.listarPilates();
-    }
+   
 
 
 //--------------------------------------
