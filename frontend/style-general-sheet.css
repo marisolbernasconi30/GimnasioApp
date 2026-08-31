@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-image:  url('imagenes/INGRESE_AL_SISTEMA.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.El_general{
+position:relative;
+max-width: 400px;
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+  flex-direction: row;
+}
+.general {
+  
+  max-width: 900px;
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+  flex-direction: row;
+  background-color:rgba(244, 230, 27, 0.52); 
+}
+
+.login-form {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0 15px 15px 0;
+
+}
+
+.input-direction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-direction form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-direction input {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.input-direction button {
+  height: 40px;
+  background-color: rgba(244, 230, 27, 0.52);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.input-direction button:hover {
+  background-color: rgba(244, 230, 27, 0.845)
+}
+
+.forgot {
+  margin-top: 15px;
+  text-align: right;
+  display: block;
+  color: #000601;
+  text-decoration: none;
+  font-size: 14px; /* define el tamaño del */
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .general {
+    flex-direction: column;
+  }
+
+  .imagen {
+    display: none;
+  }
+
+  .login-form {
+    border-radius: 15px;
+    padding: 30px;
+  }
+}
