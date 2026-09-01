@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matricular usuario</title>
+
+    <style>
+
+        /* Quitamos márgenes que pone el navegador */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Toda la pantalla */
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            background-color: #f1f1f1;
+        }
+
+        /* =========================
+           FORMULARIO
+           ========================= */
+
+        .formulario {
+            width: 70%;
+            min-height: 100vh;
+            padding: 30px 50px;
+            background-color: #f5dfaa;
+        }
+
+        .formulario h1 {
+            font-size: 38px;
+            margin-bottom: 30px;
+        }
+
+        .formulario h2 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 60px;
+        }
+
+        /* Cada fila: etiqueta + input */
+        .campo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .campo label {
+            width: 210px;
+            text-align: right;
+            margin-right: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .campo input,
+        .campo select {
+            width: 170px;
+            height: 38px;
+            border: none;
+            border-radius: 20px;
+            padding: 0 15px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* El campo de fecha */
+        .campo input[type="date"] {
+            width: 170px;
+            cursor: pointer;
+        }
+
+        /* Botón */
+        .btn-matricular {
+            margin-left: 225px;
+            margin-top: 30px;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 20px;
+            background-color: #333;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .btn-matricular:hover {
+            background-color: #555;
+        }
+
+
+        /* =========================
+           SIDEBAR
+           ========================= */
+
+        .sidebar {
+            width: 30%;
+            min-height: 100vh;
+            background-color: #333;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .sidebar button {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #ffd83d;
+            font-size: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .sidebar button:hover {
+            color: white;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         FORMULARIO
+         ========================= -->
+
+    <main class="formulario">
+
+        <h1>Matricular usuario</h1>
+
+        <h2>Complete el formulario</h2>
+
+
+        <form>
+
+            <div class="campo">
+                <label for="nombre">NOMBRE:</label>
+                <input type="text" id="nombre" name="nombre">
+            </div>
+
+
+            <div class="campo">
+                <label for="apellido">APELLIDO:</label>
+                <input type="text" id="apellido" name="apellido">
+            </div>
+
+
+            <div class="campo">
+                <label for="edad">EDAD:</label>
+                <input type="number" id="edad" name="edad">
+            </div>
+
+
+            <div class="campo">
+                <label for="celular">CELULAR:</label>
+                <input type="tel" id="celular" name="celular">
+            </div>
+
+
+            <div class="campo">
+                <label for="direccion">DIRECCIÓN:</label>
+                <input type="text" id="direccion" name="direccion">
+            </div>
+
+
+            <div class="campo">
+                <label for="lesion">LESIÓN:</label>
+                <input type="text" id="lesion" name="lesion">
+            </div>
+
+
+            <div class="campo">
+                <label for="entrenamiento">ENTRENAMIENTO:</label>
+
+                <select id="entrenamiento" name="entrenamiento">
+                    <option value="">Seleccionar</option>
+                    <option value="fuerza">Fuerza</option>
+                    <option value="cardio">Cardio</option>
+                    <option value="funcional">Funcional</option>
+                </select>
+            </div>
+
+
+            <!-- CALENDARIO -->
+            <div class="campo">
+                <label for="fechaInicio">FECHA DE INICIO:</label>
+
+                <input
+                    type="date"
+                    id="fechaInicio"
+                    name="fechaInicio">
+            </div>
+
+
+            <button type="submit" class="btn-matricular">
+                Matricular usuario
+            </button>
+
+        </form>
+
+    </main>
+
+
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+
+    <aside class="sidebar">
+
+        <button>Matricular usuario</button>
+
+        <button>Entrenamientos </button>
+
+        <button>Seguimiento<br>usuarios</button>
+
+        <button>Seguimiento de<br>cuotas</button>
+
+    </aside>
+
+
+</body>
+
+</html>

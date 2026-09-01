@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matricular usuario</title>
+
+    <style>
+
+        /* Quitamos márgenes que pone el navegador */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Toda la pantalla */
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            background-color: #f1f1f1;
+        }
+
+        /* =========================
+           FORMULARIO
+           ========================= */
+
+        .formulario {
+            width: 70%;
+            min-height: 100vh;
+            padding: 30px 50px;
+            background-color: #f5dfaa;
+        }
+
+        .formulario h1 {
+            font-size: 38px;
+            margin-bottom: 30px;
+        }
+
+        .formulario h2 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 60px;
+        }
+
+        /* Cada fila: etiqueta + input */
+        .campo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .campo label {
+            width: 210px;
+            text-align: right;
+            margin-right: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .campo input,
+        .campo select {
+            width: 170px;
+            height: 38px;
+            border: none;
+            border-radius: 20px;
+            padding: 0 15px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* El campo de fecha */
+        .campo input[type="date"] {
+            width: 170px;
+            cursor: pointer;
+        }
+
+        /* Botón */
+        .btn-matricular {
+            margin-left: 225px;
+            margin-top: 30px;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 20px;
+            background-color: #333;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .btn-matricular:hover {
+            background-color: #555;
+        }
+#contenedorTabla {
+    display: none;
+}
+
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         FORMULARIO
+         ========================= -->
+
+    <main class="formulario">
+
+        <h1>Seguimiento de usuarios:</h1>
+
+       <button>Modificar usuario</button>
+
+       <button>Listado de usuarios registrados</button>
+
+ <!-- Buscador -->
+
+        <div class="buscador">
+
+            <label for="nombreUsuario">
+                Ingrese DNI del cliente
+            </label>
+
+            <input
+                type="number"
+                id="dniUsuario"
+                placeholder="DNI del cliente"
+            >
+
+        </div>
+
+
+        <!-- Tabla -->
+
+<div class="tabla-contenedor" id="contenedorTabla">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Matrícula</th>
+                <th>Inscripciones</th>
+                <th>Estado</th>
+                <th>Último pago</th>
+            </tr>
+        </thead>
+
+        <tbody id="cuerpoTabla">
+        </tbody>
+
+    </table>
+
+</div>
+
+
+    </main>
+
+
+    
+
+
+    <script>
+
+        const buscador = document.getElementById("dniUsuario");
+
+        buscador.addEventListener("keydown", function(event) {
+
+            // Verificamos si presionó ENTER
+            if (event.key === "Enter") {
+
+                buscarUsuario();
+
+            }
+
+        });
+
+
+async function buscarUsuario() {
+
+    const nombre = buscador.value.trim();
+
+    if (nombre === "") {
+        return;
+    }
+
+    try {
+
+        const respuesta = await fetch(
+            "http://localhost:8080/usuarios/buscar?nombre="
+            + encodeURIComponent(nombre)
+        );
+
+        const usuario = await respuesta.json();
+
+        mostrarUsuario(usuario);
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("No se pudo buscar el usuario.");
+
+    }
+}
+
+
+function mostrarUsuario(usuario) {
+
+    const contenedorTabla =
+        document.getElementById("contenedorTabla");
+
+    const cuerpoTabla =
+        document.getElementById("cuerpoTabla");
+
+
+    // Limpiamos datos anteriores
+    cuerpoTabla.innerHTML = "";
+
+
+    // Creamos una fila
+    const fila = document.createElement("tr");
+
+
+    // Ponemos los datos del usuario
+    fila.innerHTML = `
+        <td>${usuario.nombre}</td>
+        <td>${usuario.apellido}</td>
+        <td>${usuario.matricula}</td>
+        <td>${usuario.inscripciones}</td>
+        <td>${usuario.estado}</td>
+        <td>${usuario.ultimoPago}</td>
+    `;
+
+
+    // Agregamos la fila a la tabla
+    cuerpoTabla.appendChild(fila);
+
+
+    // MOSTRAMOS LA TABLA
+    contenedorTabla.style.display = "block";
+}
+
+    </script>
+
+
+</body>
+
+</html>
