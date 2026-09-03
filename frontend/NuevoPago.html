@@ -11,30 +11,35 @@
   <!-- Aquí se inyectará el navbar -->
   <div id="navbar"></div>
 
-  <h1>Nuevo Pago</h1>
+  <form>
+            <fieldset>
+              <legend>Nuevo Pago</legend>
 
-
-  
+                    <div class="campo">
+                        <label for="dni">DNI DEL USUARIO:</label>
+                        <input type="text" id="dni" name="dni">
+                    </div>
+            </fieldset>
 
  <div class="item -4"> 
            <fieldset>
     
-            <legend ><b>Método de pago </b></legend>
+            <legend ><b>Seleccione método de pago </b></legend>
 
             <table border="0">
         
             <tr>
             <td>
-               <input type="radio" name="interes" > <label>Efectivo</label> 
+               <input type="radio" name="pago" > <label>Efectivo</label> 
             </td>   
             <td >
-             <input type="radio" name="interes" > <label>Transferencia</label> 
+             <input type="radio" name="pago" > <label>Transferencia</label> 
             </td>
             <td >
-             <input type="radio" name="interes" > <label>Tarjeta</label> 
+             <input type="radio" name="pago" > <label>Tarjeta</label> 
             </td>
             <td >
-             <input type="radio" name="interes" > <label>Mercado Pago</label> 
+             <input type="radio" name="pago" > <label>Mercado Pago</label> 
             </td>
             </tr>
            </table>
@@ -42,7 +47,15 @@
            </fieldset>  
         </div>
 
+            <fieldset>
+              <legend>INGRESE MONTO</legend>
 
+                    <div class="campo">
+                        <label for="monto">MONTO:</label>
+                        <input type="text" id="monto" name="monto">
+                    </div>
+            </fieldset>
+ </form>
 
 
 
