@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrenamientos</title>
+  <title>Clientes Inactivos</title>
   <link rel="stylesheet" href="styles.css"> <!-- tu CSS -->
 </head>
 <body>
@@ -11,8 +11,32 @@
   <!-- Aquí se inyectará el navbar -->
   <div id="navbar"></div>
 
-  <h1>Entrenamientos</h1>
+  <h1>Clientes Inactivos</h1>
   <p>Texto de ejemplo...</p>
+
+        <!-- Tabla -->
+
+<div class="tabla-contenedor" id="contenedorTabla">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Matrícula</th>
+                <th>Inscripciones</th>
+                <th>Estado</th>
+                <th>Último pago</th>
+            </tr>
+        </thead>
+
+        <tbody id="cuerpoTabla">
+        </tbody>
+
+    </table>
+
+</div>
 
   <script>
     // Cargar el navbar desde navbar.html

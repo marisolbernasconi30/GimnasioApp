@@ -1,46 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Matricular usuario</title>
-
-    <style>
-
-        /* Quitamos márgenes que pone el navegador */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Toda la pantalla */
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            background-color: #f1f1f1;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Usuario</title>
+  <link rel="stylesheet" href="styles.css"> <!-- tu CSS -->
 </head>
-
-
 <body>
-
-      <!-- Aquí se inyectará el navbar -->
+  
+  <!-- Aquí se inyectará el navbar -->
   <div id="navbar"></div>
 
+  <main class="formulario">
 
-    <!-- =========================
-         FORMULARIO
-         ========================= -->
-
-    <main class="formulario">
-
-        <h1>Matricular usuario</h1>
+       
 
         <br>
         <h2>Complete el formulario</h2>
@@ -48,7 +21,7 @@
 
         <form>
             <fieldset>
-                <legend>Matricular usuario</legend>
+                <legend>Actualizar usuario</legend>
 
 
                     <div class="campo">
@@ -63,7 +36,7 @@
                     </div>
                 
                 
-                    <div class="campo">
+                     <div class="campo">
                         <label for="edad">FECHA DE NACIMIENTO:</label>
                     
                         <input
@@ -72,11 +45,7 @@
                             name="edad">
                     </div>
                 
-                    <div class="campo">
-                        <label for="dni">DNI:</label>
-                        <input type="text" id="dni" name="dni">
-                    </div>
-
+                
                     <div class="campo">
                         <label for="celular">CELULAR:</label>
                         <input type="tel" id="celular" name="celular">
@@ -122,16 +91,15 @@
   </fieldset>
 </form>
 
-            <button type="submit" class="btn-matricular">
-                Matricular usuario
+            <button type="submit" class="btn-matricular"> <!-- ver "btn-matricular"-->
+                Actualizar usuario
             </button>
         
   
 
     </main>
 
-
-     <script>
+  <script>
     // Cargar el navbar desde navbar.html
     fetch("navbar.html")
       .then(res => res.text())
@@ -140,8 +108,5 @@
       })
       .catch(err => console.error("Error cargando navbar:", err));
   </script>
-
-
 </body>
-
 </html>

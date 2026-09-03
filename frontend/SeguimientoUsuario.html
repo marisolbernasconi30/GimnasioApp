@@ -5,105 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Matricular usuario</title>
+    <title>Seguimiento de usuarios</title>
 
-    <style>
-
-        /* Quitamos márgenes que pone el navegador */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Toda la pantalla */
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            background-color: #f1f1f1;
-        }
-
-        /* =========================
-           FORMULARIO
-           ========================= */
-
-        .formulario {
-            width: 70%;
-            min-height: 100vh;
-            padding: 30px 50px;
-            background-color: #f5dfaa;
-        }
-
-        .formulario h1 {
-            font-size: 38px;
-            margin-bottom: 30px;
-        }
-
-        .formulario h2 {
-            text-align: center;
-            font-size: 38px;
-            margin-bottom: 60px;
-        }
-
-        /* Cada fila: etiqueta + input */
-        .campo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .campo label {
-            width: 210px;
-            text-align: right;
-            margin-right: 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .campo input,
-        .campo select {
-            width: 170px;
-            height: 38px;
-            border: none;
-            border-radius: 20px;
-            padding: 0 15px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        /* El campo de fecha */
-        .campo input[type="date"] {
-            width: 170px;
-            cursor: pointer;
-        }
-
-        /* Botón */
-        .btn-matricular {
-            margin-left: 225px;
-            margin-top: 30px;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 20px;
-            background-color: #333;
-            color: white;
-            font-size: 17px;
-            cursor: pointer;
-        }
-
-        .btn-matricular:hover {
-            background-color: #555;
-        }
-#contenedorTabla {
-    display: none;
-}
-
-
-    </style>
 </head>
 
 
 <body>
+
+      <!-- Aquí se inyectará el navbar -->
+  <div id="navbar"></div>
 
     <!-- =========================
          FORMULARIO
@@ -113,9 +23,20 @@
 
         <h1>Seguimiento de usuarios:</h1>
 
-       <button>Modificar usuario</button>
+        
+<ul>
+      <li><a href="MatricularUsuario.html">Crear usuario</a></li>
+      <li><a href="ActualizarUsuario.html">Actualizar</a></li>
+      <li>
+        <a href="#">Listado de usuarios registrados</a>
+        <ul>
+          <li><a href="ClientesActivos.html">Clientes activos</a></li> <!-- ver como programar esto-->
+          <li><a href="ClientesInactivos.html">Clientes inactivos</a></li>  <!-- ver como programar esto-->
+        </ul>
+      </li>
+      <li><a href="DarDeBaja.html">Dar de baja</a></li>
+ </ul>
 
-       <button>Listado de usuarios registrados</button>
 
  <!-- Buscador -->
 
@@ -248,6 +169,16 @@ function mostrarUsuario(usuario) {
 
     </script>
 
+<!--    NAVBAR  -->
+  <script>
+    // Cargar el navbar desde navbar.html
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      })
+      .catch(err => console.error("Error cargando navbar:", err));
+  </script>
 
 </body>
 
