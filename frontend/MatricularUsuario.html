@@ -64,12 +64,12 @@
                 
                 
                     <div class="campo">
-                        <label for="edad">FECHA DE NACIMIENTO:</label>
+                        <label for="fechaNacimiento">FECHA DE NACIMIENTO:</label>
                     
                         <input
                             type="date"
-                            id="edad"
-                            name="edad">
+                            id="fechaNacimiento"
+                            name="fechaNacimiento">
                     </div>
                 
                     <div class="campo">
@@ -95,40 +95,20 @@
                     </div>
                 
                 
-                    <div class="campo">
-                        <label for="entrenamiento">ENTRENAMIENTO:</label>
                     
-                        <select id="entrenamiento" name="entrenamiento">
-                            <option value="">Seleccionar</option>
-                            <option value="fuerza">Musculación</option>
-                            <option value="cardio">Cardio</option>
-                            <option value="funcional">Funcional</option>
-                            <option value="crossfit">Crossfit</option>
-                            <option value="yoga">Yoga</option>
-                            <option value="pilates">Pilates</option>
-                        </select>
-                    </div>
-                
-                
-                    <!-- CALENDARIO -->
-                    <div class="campo">
-                        <label for="fechaInicio">FECHA DE INICIO:</label>
-                    
-                        <input
-                            type="date"
-                            id="fechaInicio"
-                            name="fechaInicio">
-                    </div>
   </fieldset>
 </form>
 
-            <button type="submit" class="btn-matricular">
+            <button onclick="crearCliente()" class="btn-matricular">
                 Matricular usuario
             </button>
         
   
 
     </main>
+
+    //conecto con el backend y bdd
+ <script src="clientes.js"></script>
 
 
      <script>

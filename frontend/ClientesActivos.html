@@ -14,7 +14,9 @@
 
     <h1>Usuarios</h1>
 
-    <button onclick="listarClientes()">Ver usuarios</button>
+    <button onclick="listarClientes()">Ver usuarios Activos</button>
+
+    <button onclick="listarClientesInactivos()">Ver usuarios Inactivos</button>
 
     <table>
         <thead>
@@ -24,7 +26,7 @@
                 <th>DNI</th>
                 <th>Edad</th>
                 <th>Celular</th>
-                <th>Domicilio</th>
+                <th>Dirección</th>
                 <th>Lesión</th>
             </tr>
         </thead>
@@ -33,6 +35,7 @@
         </tbody>
     </table>
 
+    <script src="clientes.js"></script>
     <script>
 
         // Cargar navbar
@@ -42,43 +45,6 @@
                 document.getElementById("navbar").innerHTML = data;
             })
             .catch(err => console.error("Error cargando navbar:", err));
-
-
-        // Obtener clientes
-        function listarClientes() {
-
-            fetch("http://localhost:8080/clientes") 
-                .then(response => response.json())
-                .then(usuarios => {
-
-                    console.log(usuarios);
-
-                    const tabla = document.getElementById("usuarios");
-
-                    tabla.innerHTML = "";
-
-                    usuarios.forEach(usuario => {
-
-                        tabla.innerHTML += `
-                            <tr>
-                                <td>${usuario.nombre}</td>
-                                <td>${usuario.apellido}</td>
-                                <td>${usuario.dni}</td>
-                                <td>${usuario.edad}</td>
-                                <td>${usuario.celular}</td>
-                                <td>${usuario.domicilio}</td>
-                                <td>${usuario.lesion}</td>
-                            </tr>
-                        `;
-
-                    });
-
-                })
-                .catch(error => {
-                    console.error("Error obteniendo usuarios:", error);
-                });
-        }
-
     </script>
 
 </body>
