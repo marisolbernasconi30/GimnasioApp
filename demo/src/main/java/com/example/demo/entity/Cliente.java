@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.time.LocalDate;
+
 //import java.util.List;
 
 //import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -22,7 +24,7 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String dni;
-    private int edad;
+    private LocalDate edad;
     private String celular;
     private String domicilio;
     private String lesion;
@@ -38,7 +40,7 @@ public class Cliente {
     }
 
     // Constructor sin ID (buena práctica)
-    public Cliente(String nombre, String apellido, String dni, int edad, String celular, String domicilio, String lesion) {
+    public Cliente(String nombre, String apellido, String dni, LocalDate edad, String celular, String domicilio, String lesion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -82,11 +84,11 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public int getEdad() {
+    public LocalDate getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(LocalDate edad) {
         this.edad = edad;
     }
 

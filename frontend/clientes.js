@@ -24,6 +24,12 @@ const API_URL = "http://localhost:8080/clientes";
                                 <td>${usuario.celular}</td>
                                 <td>${usuario.domicilio}</td>
                                 <td>${usuario.lesion}</td>
+                                <td>
+                                    <button class="btn-editar" data-id="${usuario.id}">
+                                         Editar
+                                    </button>
+                                </td>
+
                             </tr>
                         `;
 
@@ -58,6 +64,11 @@ const API_URL = "http://localhost:8080/clientes";
                                 <td>${usuario.celular}</td>
                                 <td>${usuario.domicilio}</td>
                                 <td>${usuario.lesion}</td>
+                                <td>
+                                    <button class="btn-editar" data-id="${usuario.id}">
+                                        Editar
+                                    </button>
+                                </td>   
                             </tr>
                         `;
 
@@ -75,19 +86,19 @@ function crearCliente() {
 
     const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
-    const fechaNacimiento = document.getElementById("fechaNacimiento").value;
+    const edad = document.getElementById("edad").value;
     const dni = document.getElementById("dni").value;
     const celular = document.getElementById("celular").value;
-    const direccion = document.getElementById("direccion").value;
+    const domicilio = document.getElementById("domicilio").value;
     const lesion = document.getElementById("lesion").value;
 
     const cliente = {
         nombre,
         apellido,
-        fechaNacimiento,
+        edad,
         dni,
         celular,
-        direccion,
+        domicilio,
         lesion
     };
 
@@ -108,4 +119,9 @@ function crearCliente() {
         console.error("Error:", error);
     });
 }
-    
+
+//PUT EDITAR CLIENTE
+function editarCliente() {
+
+
+}
