@@ -1,21 +1,21 @@
-const API_URL = "http://localhost:8080/clientes"; 
- 
- // Obtener clientes activos
-        function listarClientes() {
+const url = CLIENTES_URL;
 
-            fetch("http://localhost:8080/clientes") 
-                .then(response => response.json())
-                .then(usuarios => {
+// Obtener clientes activos
+function listarClientes() {
 
-                    console.log(usuarios);
+    fetch(url)
+        .then(response => response.json())
+        .then(usuarios => {
 
-                    const tabla = document.getElementById("usuarios");
+            console.log(usuarios);
 
-                    tabla.innerHTML = "";
+            const tabla = document.getElementById("usuarios");
 
-                    usuarios.forEach(usuario => {
+            tabla.innerHTML = "";
 
-                        tabla.innerHTML += `
+            usuarios.forEach(usuario => {
+
+                tabla.innerHTML += `
                             <tr>
                                 <td>${usuario.nombre}</td>
                                 <td>${usuario.apellido}</td>
@@ -33,29 +33,30 @@ const API_URL = "http://localhost:8080/clientes";
                             </tr>
                         `;
 
-                    });
+            });
 
-                })
-                .catch(error => {
-                    console.error("Error obteniendo usuarios:", error);
-                });
-            }
-        // Obtener clientes inactivos   
- function listarClientesInactivos() {
+        })
+        .catch(error => {
+            console.error("Error obteniendo usuarios:", error);
+        });
+}
 
-            fetch("http://localhost:8080/clientes/baja") 
-                .then(response => response.json())
-                .then(usuarios => {
+// Obtener clientes inactivos   
+function listarClientesInactivos() {
 
-                    console.log(usuarios);
+    fetch(url+"/baja")
+        .then(response => response.json())
+        .then(usuarios => {
 
-                    const tabla = document.getElementById("usuarios");
+            console.log(usuarios);
 
-                    tabla.innerHTML = "";
+            const tabla = document.getElementById("usuarios");
 
-                    usuarios.forEach(usuario => {
+            tabla.innerHTML = "";
 
-                        tabla.innerHTML += `
+            usuarios.forEach(usuario => {
+
+                tabla.innerHTML += `
                             <tr>
                                 <td>${usuario.nombre}</td>
                                 <td>${usuario.apido}</td>
@@ -72,13 +73,13 @@ const API_URL = "http://localhost:8080/clientes";
                             </tr>
                         `;
 
-                    });
+            });
 
-                })
-                .catch(error => {
-                    console.error("Error obteniendo usuarios:", error);
-                });
-            }
+        })
+        .catch(error => {
+            console.error("Error obteniendo usuarios:", error);
+        });
+}
 
 //POST
 
@@ -104,20 +105,20 @@ function crearCliente() {
 
     console.log("Voy a enviar:", cliente);
 
-    fetch(API_URL, {
+    fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(cliente)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Cliente creado:", data);
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log("Cliente creado:", data);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 }
 
 //PUT EDITAR CLIENTE
