@@ -20,7 +20,7 @@ const API_URL = "http://localhost:8080/clientes";
                                 <td>${usuario.nombre}</td>
                                 <td>${usuario.apellido}</td>
                                 <td>${usuario.dni}</td>
-                                <td>${usuario.edad}</td>
+                                <td>${usuario.fecha_nacimiento}</td>
                                 <td>${usuario.celular}</td>
                                 <td>${usuario.domicilio}</td>
                                 <td>${usuario.lesion}</td>
@@ -60,7 +60,7 @@ const API_URL = "http://localhost:8080/clientes";
                                 <td>${usuario.nombre}</td>
                                 <td>${usuario.apellido}</td>
                                 <td>${usuario.dni}</td>
-                                <td>${usuario.edad}</td>
+                                <td>${usuario.fecha_nacimiento}</td>
                                 <td>${usuario.celular}</td>
                                 <td>${usuario.domicilio}</td>
                                 <td>${usuario.lesion}</td>
@@ -86,7 +86,7 @@ function crearCliente() {
 
     const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
-    const edad = document.getElementById("edad").value;
+    const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
     const dni = document.getElementById("dni").value;
     const celular = document.getElementById("celular").value;
     const domicilio = document.getElementById("domicilio").value;
@@ -95,7 +95,7 @@ function crearCliente() {
     const cliente = {
         nombre,
         apellido,
-        edad,
+        fecha_nacimiento,
         dni,
         celular,
         domicilio,

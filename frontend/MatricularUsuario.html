@@ -8,7 +8,6 @@
     <title>Matricular usuario</title>
 
     <style>
-
         /* Quitamos márgenes que pone el navegador */
         * {
             margin: 0;
@@ -23,15 +22,14 @@
             display: flex;
             background-color: #f1f1f1;
         }
-
     </style>
 </head>
 
 
 <body>
 
-      <!-- Aquí se inyectará el navbar -->
-  <div id="navbar"></div>
+    <!-- Aquí se inyectará el navbar -->
+    <div id="navbar"></div>
 
 
     <!-- =========================
@@ -51,75 +49,72 @@
                 <legend>Matricular usuario</legend>
 
 
-                    <div class="campo">
-                        <label for="nombre">NOMBRE:</label>
-                        <input type="text" id="nombre" name="nombre">
-                    </div>
-                
-                
-                    <div class="campo">
-                        <label for="apellido">APELLIDO:</label>
-                        <input type="text" id="apellido" name="apellido">
-                    </div>
-                
-                
-                    <div class="campo">
-                        <label for="edad">FECHA DE NACIMIENTO:</label>
-                    
-                        <input
-                            type="date"
-                            id="edad"
-                            name="edad">
-                    </div>
-                
-                    <div class="campo">
-                        <label for="dni">DNI:</label>
-                        <input type="text" id="dni" name="dni">
-                    </div>
+                <div class="campo">
+                    <label for="nombre">NOMBRE:</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
 
-                    <div class="campo">
-                        <label for="celular">CELULAR:</label>
-                        <input type="tel" id="celular" name="celular">
-                    </div>
-                
-                
-                    <div class="campo">
-                        <label for="domicilio">DIRECCIÓN:</label>
-                        <input type="text" id="domicilio" name="domicilio">
-                    </div>
-                
-                
-                    <div class="campo">
-                        <label for="lesion">LESIÓN:</label>
-                        <input type="text" id="lesion" name="lesion">
-                    </div>
-                
-                
-                    
-  </fieldset>
-</form>
 
-            <button onclick="crearCliente()" class="btn-matricular">
-                Matricular usuario
-            </button>
-        
-  
+                <div class="campo">
+                    <label for="apellido">APELLIDO:</label>
+                    <input type="text" id="apellido" name="apellido">
+                </div>
+
+
+                <div class="campo">
+                    <label for="fecha_nacimiento">FECHA DE NACIMIENTO:</label>
+
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                </div>
+
+                <div class="campo">
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" name="dni">
+                </div>
+
+                <div class="campo">
+                    <label for="celular">CELULAR:</label>
+                    <input type="tel" id="celular" name="celular">
+                </div>
+
+
+                <div class="campo">
+                    <label for="domicilio">DIRECCIÓN:</label>
+                    <input type="text" id="domicilio" name="domicilio">
+                </div>
+
+
+                <div class="campo">
+                    <label for="lesion">LESIÓN:</label>
+                    <input type="text" id="lesion" name="lesion">
+                </div>
+
+
+
+            </fieldset>
+        </form>
+
+        <button onclick="crearCliente()" class="btn-matricular">
+            Matricular usuario
+        </button>
+
+
 
     </main>
 
-    //conecto con el backend y bdd
- <script src="clientes.js"></script>
+    <!-- conecto con el backend y bdd -->
+    <script src="clientes.js"></script>
 
 
-     <script>
-    // Cargar el navbar desde navbar.html
-    fetch("navbar.html")
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("navbar").innerHTML = data;
-      })
-      .catch(err => console.error("Error cargando navbar:", err));
-  </script>
+    <script>
+        // Cargar el navbar desde navbar.html
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+            })
+            .catch(err => console.error("Error cargando navbar:", err));
+    </script>
 
 
 </body>

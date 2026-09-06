@@ -66,7 +66,7 @@ public class ClienteService {
 
         cliente.setNombre(clienteActualizado.getNombre());
         cliente.setApellido(clienteActualizado.getApellido());
-        cliente.setEdad(clienteActualizado.getEdad());
+        cliente.setFechaNacimiento(clienteActualizado.getFechaNacimiento());
         cliente.setCelular(clienteActualizado.getCelular());
         cliente.setDomicilio(clienteActualizado.getDomicilio());
         cliente.setLesion(clienteActualizado.getLesion());
