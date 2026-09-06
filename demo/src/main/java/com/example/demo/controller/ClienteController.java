@@ -9,7 +9,7 @@ import com.example.demo.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173") // VER SI FUNCIONA CON EL FRONTEND, SI NO, CAMBIAR EL ORIGINS A LA URL DEL FRONTEND
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -25,8 +25,8 @@ public class ClienteController {
         return clienteService.listar();
     }
 
-
-       // Devuelve la lista de clientes INACTIVOS 
+    // GET /clientes/baja
+    // Devuelve la lista de clientes INACTIVOS 
     @GetMapping("/baja")
     public List<Cliente> listarClientesBaja(){
         return clienteService.listarBaja();
