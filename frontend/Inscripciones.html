@@ -3,40 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inscripciones Inactivas</title>
-  <link rel="stylesheet" href="styles.css"> <!-- tu CSS -->
+  <title>Inscripciones</title>
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/inscripciones.css">
 </head>
 <body>
   
   <!-- Aquí se inyectará el navbar -->
   <div id="navbar"></div>
 
-  <h1>Inscripciones Inactivas</h1>
+  <h1>Inscripciones</h1>
   <p>Texto de ejemplo...</p>
 
         <!-- Tabla -->
 
 <div class="tabla-contenedor" id="contenedorTabla">
 
-    <table>
-
+    <table id="tablaInscripciones">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Inscripciones</th>
                 <th>Estado</th>
-                <th>Último pago</th>
+                <th>Tipo de Entrenamiento</th>
+                <th>cliente_id</th>
+                <th>fecha_inicio</th>
+                <th>fecha_baja</th>
             </tr>
         </thead>
-
-        <tbody id="cuerpoTabla">
+        <tbody id="cuerpoTablaInscripciones">
         </tbody>
 
     </table>
-
+<button id="anterior">Anterior</button>
+<button id="siguiente">Siguiente</button>
 </div>
 
+  <!-- Navbar -->
   <script>
     // Cargar el navbar desde navbar.html
     fetch("navbar.html")
@@ -46,5 +47,9 @@
       })
       .catch(err => console.error("Error cargando navbar:", err));
   </script>
+
+  <!-- JavaScript -->
+  <script src="js/config.js"></script>
+  <script src="js/inscripciones.js"></script>
 </body>
 </html>
