@@ -1,0 +1,11 @@
+:root {
+    --azul-oscuro: #16325B;
+    --azul-principal: #227B94;
+    --celeste: #78B7D0;
+    --amarillo: #FFDC7F;
+}
+
+/* #16325B → fondo del navbar, títulos importantes, elementos principales.
+#227B94 → botones, encabezados de tabla, elementos activos.
+#78B7D0 → fondos suaves, hover, bordes/accentos.
+#FFDC7F → acciones destacadas, indicadores, estados/avisos. */
