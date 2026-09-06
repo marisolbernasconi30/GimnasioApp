@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -72,7 +73,7 @@ public class InscripcionService {
             .orElseThrow(() -> new RuntimeException("Inscripcion no encontrada")); // buscar la inscripción por id
 
         inscripcion.setActiva(false);// marcar como inactiva
-
+        inscripcion.setFechaBaja(LocalDate.now());
         return inscripcionRepository.save(inscripcion);
     }
 

@@ -26,6 +26,9 @@ public class Inscripcion {
 
     private LocalDate fechaInicio;
 
+    private LocalDate fechaBaja;
+
+
     private boolean activa = true;   
 
     public Inscripcion() {}
@@ -63,6 +66,14 @@ public class Inscripcion {
 
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaBaja() {
+        return fechaBaja;
+    }
+
+    public void setFechaBaja(LocalDate fechaBaja) {
+        this.fechaBaja = fechaBaja;
     }
 
     public boolean isActiva() {
