@@ -58,7 +58,7 @@ const API_URL = "http://localhost:8080/clientes";
                         tabla.innerHTML += `
                             <tr>
                                 <td>${usuario.nombre}</td>
-                                <td>${usuario.apellido}</td>
+                                <td>${usuario.apido}</td>
                                 <td>${usuario.dni}</td>
                                 <td>${usuario.fecha_nacimiento}</td>
                                 <td>${usuario.celular}</td>
