@@ -142,3 +142,10 @@ function editarCliente() {
 
 
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("btnActivos").addEventListener("click", listarClientes);
+    document.getElementById("btnInactivos").addEventListener("click", listarClientesInactivos);
+    document.getElementById("btnMatricular").addEventListener("click", crearCliente);
+});
