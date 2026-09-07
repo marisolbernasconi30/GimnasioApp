@@ -1,43 +1,59 @@
+import { CLIENTES_URL } from './config.js';
+
 const url = CLIENTES_URL;
 
 // Obtener clientes activos
 function listarClientes() {
 
-    fetch(url)
-        .then(response => response.json())
+    console.log("1. Ejecutando listarClientes()");
+    console.log("2. URL:", CLIENTES_URL);
+
+    fetch(CLIENTES_URL)
+        .then(response => {
+
+            console.log("3. Respuesta recibida:", response);
+            console.log("4. Status:", response.status);
+
+            if (!response.ok) {
+                throw new Error("HTTP error: " + response.status);
+            }
+
+            return response.json();
+        })
         .then(usuarios => {
 
-            console.log(usuarios);
+            console.log("5. Usuarios recibidos:", usuarios);
+            console.log("6. Cantidad:", usuarios.length);
 
             const tabla = document.getElementById("usuarios");
+
+            console.log("7. Tabla encontrada:", tabla);
 
             tabla.innerHTML = "";
 
             usuarios.forEach(usuario => {
 
                 tabla.innerHTML += `
-                            <tr>
-                                <td>${usuario.nombre}</td>
-                                <td>${usuario.apellido}</td>
-                                <td>${usuario.dni}</td>
-                                <td>${usuario.fecha_nacimiento}</td>
-                                <td>${usuario.celular}</td>
-                                <td>${usuario.domicilio}</td>
-                                <td>${usuario.lesion}</td>
-                                <td>
-                                    <button class="btn-editar" data-id="${usuario.id}">
-                                         Editar
-                                    </button>
-                                </td>
-
-                            </tr>
-                        `;
-
+                    <tr>
+                        <td>${usuario.nombre}</td>
+                        <td>${usuario.apellido}</td>
+                        <td>${usuario.dni}</td>
+                        <td>${usuario.fecha_nacimiento}</td>
+                        <td>${usuario.celular}</td>
+                        <td>${usuario.domicilio}</td>
+                        <td>${usuario.lesion}</td>
+                        <td>
+                            <button class="btn-editar" data-id="${usuario.id}">
+                                Editar
+                            </button>
+                        </td>
+                    </tr>
+                `;
             });
 
         })
         .catch(error => {
-            console.error("Error obteniendo usuarios:", error);
+            console.error("ERROR:", error);
         });
 }
 
@@ -59,7 +75,7 @@ function listarClientesInactivos() {
                 tabla.innerHTML += `
                             <tr>
                                 <td>${usuario.nombre}</td>
-                                <td>${usuario.apido}</td>
+                                <td>${usuario.apellido}</td>
                                 <td>${usuario.dni}</td>
                                 <td>${usuario.fecha_nacimiento}</td>
                                 <td>${usuario.celular}</td>
