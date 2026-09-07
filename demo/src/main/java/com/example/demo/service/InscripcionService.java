@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.InscripcionDTO;
@@ -43,8 +45,8 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
-    public List<Inscripcion> listar() {
-       return inscripcionRepository.findByActivaTrue();
+    public Page<Inscripcion> listar(Pageable pageable) {
+       return inscripcionRepository.findByActivaTrue(pageable);
     }
 
     //para obtener la lista por id
@@ -77,7 +79,7 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
-    public List<Inscripcion> listarInscripInac() { //ME DEVUELVE TODAS LAS INSCRIPCIONES INACTIVAS 
-        return inscripcionRepository.findByActivaFalse();
+    public Page<Inscripcion> listarInscripInac(Pageable pageable) { //ME DEVUELVE TODAS LAS INSCRIPCIONES INACTIVAS 
+        return inscripcionRepository.findByActivaFalse(pageable);
     }
 }

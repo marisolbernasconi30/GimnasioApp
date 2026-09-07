@@ -1,12 +1,22 @@
+import { INSCRIPCIONES_URL } from './config.js';
+
 let paginaActual = 0;
 const cantidadPorPagina = 10;
+
+let totalPaginas = 0;
 
 const parametros = new URLSearchParams(window.location.search);
 const estado = parametros.get("estado");
 
 async function cargarInscripciones() {
 
-    const url = `${INSCRIPCIONES_URL}?estado=${estado}&page=${paginaActual}&size=${cantidadPorPagina}`;
+    let url;
+
+    if (estado === "inactivas") {
+        url = `${INSCRIPCIONES_URL}/inactivas?page=${paginaActual}&size=${cantidadPorPagina}`;
+    } else {
+        url = `${INSCRIPCIONES_URL}?page=${paginaActual}&size=${cantidadPorPagina}`;
+    }
 
     try {
 
@@ -18,17 +28,37 @@ async function cargarInscripciones() {
 
         const datos = await respuesta.json();
 
-        mostrarInscripciones(datos);
+        // Información de la paginación
+        totalPaginas = datos.totalPages;
+
+        // Las inscripciones están dentro de "content"
+        mostrarInscripciones(datos.content);
+
+        actualizarBotones();
 
     } catch (error) {
         console.error(error);
     }
 }
 
+
+// ---------------------------------------------
+// BOTÓN SIGUIENTE
+// ---------------------------------------------
+
 document.getElementById("siguiente").addEventListener("click", () => {
-    paginaActual++;
-    cargarInscripciones();
+
+    if (paginaActual < totalPaginas - 1) {
+        paginaActual++;
+        cargarInscripciones();
+    }
+
 });
+
+
+// ---------------------------------------------
+// BOTÓN ANTERIOR
+// ---------------------------------------------
 
 document.getElementById("anterior").addEventListener("click", () => {
 
@@ -39,9 +69,14 @@ document.getElementById("anterior").addEventListener("click", () => {
 
 });
 
+
+// ---------------------------------------------
+// MOSTRAR INSCRIPCIONES
+// ---------------------------------------------
+
 function mostrarInscripciones(inscripciones) {
 
-    const cuerpo = document.getElementById("cuerpoTabla");
+    const cuerpo = document.getElementById("cuerpoTablaInscripciones");
 
     cuerpo.innerHTML = "";
 
@@ -50,15 +85,40 @@ function mostrarInscripciones(inscripciones) {
         const fila = document.createElement("tr");
 
         fila.innerHTML = `
-            <td>${inscripcion.activa===1 ? "Activa" : "Inactiva"}</td>
-            <td>${inscripcion.tipo_entrenamiento}</td>
-            <td>${inscripcion.cliente_id}</td>
-            <td>${inscripcion.fecha_inicio}</td>
-            <td>${inscripcion.fecha_baja ?? "-"}</td>
+            <td>${inscripcion.activa ? "Activa" : "Inactiva"}</td>
+            <td>${inscripcion.tipoEntrenamiento}</td>
+            <td>${inscripcion.cliente.id}</td>
+            <td>${inscripcion.fechaInicio}</td>
+            <td>${inscripcion.fechaBaja ?? "-"}</td>
         `;
 
         cuerpo.appendChild(fila);
     });
 }
+
+
+// ---------------------------------------------
+// ACTUALIZAR BOTONES
+// ---------------------------------------------
+
+function actualizarBotones() {
+
+    const botonAnterior = document.getElementById("anterior");
+    const botonSiguiente = document.getElementById("siguiente");
+
+    botonAnterior.disabled = paginaActual === 0;
+
+    botonSiguiente.disabled =
+        paginaActual >= totalPaginas - 1;
+
+    const textoPagina = document.getElementById("paginaActual");
+
+    textoPagina.textContent = `Página ${paginaActual + 1}`;    
+}
+
+
+// ---------------------------------------------
+// CARGAR PRIMERA PÁGINA
+// ---------------------------------------------
 
 cargarInscripciones();

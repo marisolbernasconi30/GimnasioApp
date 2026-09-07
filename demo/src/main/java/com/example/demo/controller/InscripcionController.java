@@ -2,8 +2,9 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.data.domain.Pageable;
 import com.example.demo.dto.InscripcionDTO;
 import com.example.demo.entity.Inscripcion;
 import com.example.demo.entity.enums.TipoEntrenamiento;
@@ -24,14 +25,16 @@ public class InscripcionController {
     // GET /inscripciones
     // Lista inscripciones ACTIVAS 
     @GetMapping
-    public List<Inscripcion> listar(){
-        return inscripcionService.listar();
+    public Page<Inscripcion> listar(Pageable pageable){
+        return inscripcionService.listar(pageable);
     }
+
+    //GET /inscripciones?page=1&size=10
 
      // Lista inscripciones INACTIVAS 
     @GetMapping ("/inactivas")
-    public List<Inscripcion> listarInscripInac(){
-        return inscripcionService.listarInscripInac();
+    public Page<Inscripcion> listarInscripInac(Pageable pageable){
+        return inscripcionService.listarInscripInac(pageable);
     }
 
 //-------------------------------------
