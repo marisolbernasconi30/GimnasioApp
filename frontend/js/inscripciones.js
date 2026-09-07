@@ -2,25 +2,22 @@ import { INSCRIPCIONES_URL } from './config.js';
 
 let paginaActual = 0;
 const cantidadPorPagina = 10;
-
 let totalPaginas = 0;
 
-
-const parametros = new URLSearchParams(window.location.search);
-const estado = parametros.get("estado");
+// Reemplaza a "estado" leído de la URL
+let estadoActual = "activas"; // valor por defecto al cargar la página
 
 async function cargarInscripciones() {
 
     let url;
 
-    if (estado === "inactivas") {
+    if (estadoActual === "inactivas") {
         url = `${INSCRIPCIONES_URL}/inactivas?page=${paginaActual}&size=${cantidadPorPagina}`;
     } else {
         url = `${INSCRIPCIONES_URL}?page=${paginaActual}&size=${cantidadPorPagina}`;
     }
 
     try {
-
         const respuesta = await fetch(url);
 
         if (!respuesta.ok) {
@@ -29,12 +26,8 @@ async function cargarInscripciones() {
 
         const datos = await respuesta.json();
 
-        // Información de la paginación
         totalPaginas = datos.totalPages;
-
-        // Las inscripciones están dentro de "content"
         mostrarInscripciones(datos.content);
-
         actualizarBotones();
 
     } catch (error) {
@@ -43,22 +36,17 @@ async function cargarInscripciones() {
 }
 
 document.getElementById("btnActivas").addEventListener("click", () => {
-
     estadoActual = "activas";
     paginaActual = 0;
-
     cargarInscripciones();
-
 });
 
 document.getElementById("btnInactivas").addEventListener("click", () => {
-
     estadoActual = "inactivas";
     paginaActual = 0;
-
     cargarInscripciones();
-
 });
+
 
 // ---------------------------------------------
 // BOTÓN SIGUIENTE
