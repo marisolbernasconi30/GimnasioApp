@@ -38,7 +38,7 @@ function listarClientes() {
                         <td>${usuario.nombre}</td>
                         <td>${usuario.apellido}</td>
                         <td>${usuario.dni}</td>
-                        <td>${usuario.fecha_nacimiento}</td>
+                        <td>${usuario.fechaNacimiento}</td>
                         <td>${usuario.celular}</td>
                         <td>${usuario.domicilio}</td>
                         <td>${usuario.lesion}</td>
@@ -77,7 +77,7 @@ function listarClientesInactivos() {
                                 <td>${usuario.nombre}</td>
                                 <td>${usuario.apellido}</td>
                                 <td>${usuario.dni}</td>
-                                <td>${usuario.fecha_nacimiento}</td>
+                                <td>${usuario.fechaNacimiento}</td>
                                 <td>${usuario.celular}</td>
                                 <td>${usuario.domicilio}</td>
                                 <td>${usuario.lesion}</td>
@@ -103,7 +103,7 @@ function crearCliente() {
 
     const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
-    const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
+    const fechaNacimiento = document.getElementById("fechaNacimiento").value;
     const dni = document.getElementById("dni").value;
     const celular = document.getElementById("celular").value;
     const domicilio = document.getElementById("domicilio").value;
@@ -112,7 +112,7 @@ function crearCliente() {
     const cliente = {
         nombre,
         apellido,
-        fecha_nacimiento,
+        fechaNacimiento,
         dni,
         celular,
         domicilio,
@@ -128,12 +128,20 @@ function crearCliente() {
         },
         body: JSON.stringify(cliente)
     })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error: " + response.status);
+            }
+            return response.json();
+        })
         .then(data => {
             console.log("Cliente creado:", data);
+            mostrarToast("Cliente registrado con éxito", "exito");
+            document.querySelector("form").reset();
         })
         .catch(error => {
             console.error("Error:", error);
+            mostrarToast("Error al crear cliente", "error");
         });
 }
 
@@ -145,7 +153,23 @@ function editarCliente() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("btnActivos").addEventListener("click", listarClientes);
-    document.getElementById("btnInactivos").addEventListener("click", listarClientesInactivos);
-    document.getElementById("btnMatricular").addEventListener("click", crearCliente);
+    const btnActivos = document.getElementById("btnActivos");
+    const btnInactivos = document.getElementById("btnInactivos");
+    const btnMatricular = document.getElementById("btnMatricular");
+
+    if (btnActivos) btnActivos.addEventListener("click", listarClientes);
+    if (btnInactivos) btnInactivos.addEventListener("click", listarClientesInactivos);
+    if (btnMatricular) btnMatricular.addEventListener("click", crearCliente);
 });
+
+
+function mostrarToast(mensaje, tipo) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = mensaje;
+    toast.className = "toast mostrar " + tipo;
+
+    setTimeout(() => {
+        toast.className = "toast " + tipo;
+    }, 3000);
+}

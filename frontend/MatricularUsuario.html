@@ -22,6 +22,34 @@
             display: flex;
             background-color: #f1f1f1;
         }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 14px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.mostrar {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.exito {
+            background-color: #2e7d32;
+        }
+
+        .toast.error {
+            background-color: #c62828;
+        }
     </style>
 </head>
 
@@ -62,9 +90,9 @@
 
 
                 <div class="campo">
-                    <label for="fecha_nacimiento">FECHA DE NACIMIENTO:</label>
+                    <label for="fechaNacimiento">FECHA DE NACIMIENTO:</label>
 
-                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento">
                 </div>
 
                 <div class="campo">
@@ -94,17 +122,15 @@
             </fieldset>
         </form>
 
-        <button onclick="crearCliente()" class="btn-matricular">
-            Matricular usuario
-        </button>
+        <button id="btnMatricular" class="btn-matricular">Matricular usuario</button>
 
 
 
     </main>
 
     <!-- conecto con el backend y bdd -->
-    <script  type="module" src="js/clientes.js"></script>
-    <script  type="module" src="js/config.js"></script>
+    <script type="module" src="js/clientes.js"></script>
+    <script type="module" src="js/config.js"></script>
 
     <script>
         // Cargar el navbar desde navbar.html
@@ -116,6 +142,7 @@
             .catch(err => console.error("Error cargando navbar:", err));
     </script>
 
+    <div id="toast" class="toast"></div>
 
 </body>
 

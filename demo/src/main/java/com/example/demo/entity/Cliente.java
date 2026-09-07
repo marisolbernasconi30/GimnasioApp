@@ -24,7 +24,7 @@ public class Cliente {
     private String nombre;
     private String apellido;
     private String dni;
-    private LocalDate fecha_nacimiento;
+    private LocalDate fechaNacimiento;
     private String celular;
     private String domicilio;
     private String lesion;
@@ -40,11 +40,11 @@ public class Cliente {
     }
 
     // Constructor sin ID (buena práctica)
-    public Cliente(String nombre, String apellido, String dni, LocalDate fecha_nacimiento, String celular, String domicilio, String lesion) {
+    public Cliente(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String celular, String domicilio, String lesion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.fecha_nacimiento = fecha_nacimiento;
+        this.fechaNacimiento = fechaNacimiento;
         this.celular = celular;
         this.domicilio = domicilio;
         this.lesion = lesion;
@@ -85,11 +85,11 @@ public class Cliente {
     }
 
     public LocalDate getFechaNacimiento() {
-        return fecha_nacimiento;
+        return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fecha_nacimiento) {
-        this.fecha_nacimiento = fecha_nacimiento;
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getCelular() {
