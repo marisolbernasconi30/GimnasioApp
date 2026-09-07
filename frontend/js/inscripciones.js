@@ -87,7 +87,7 @@ function mostrarInscripciones(inscripciones) {
         fila.innerHTML = `
             <td>${inscripcion.activa ? "Activa" : "Inactiva"}</td>
             <td>${inscripcion.tipoEntrenamiento}</td>
-            <td>${inscripcion.cliente.id}</td>
+            <td>${inscripcion.id}</td>
             <td>${inscripcion.fechaInicio}</td>
             <td>${inscripcion.fechaBaja ?? "-"}</td>
         `;
