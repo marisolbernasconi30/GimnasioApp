@@ -66,6 +66,7 @@ public class ClienteService {
 
         cliente.setNombre(clienteActualizado.getNombre());
         cliente.setApellido(clienteActualizado.getApellido());
+        cliente.setDni(clienteActualizado.getDni());
         cliente.setFechaNacimiento(clienteActualizado.getFechaNacimiento());
         cliente.setCelular(clienteActualizado.getCelular());
         cliente.setDomicilio(clienteActualizado.getDomicilio());
