@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario</title>
+    <link rel="stylesheet" href="./css/global.css"> <!-- tu CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            background-color: #f1f1f1;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 14px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.mostrar {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.exito {
+            background-color: #2e7d32;
+        }
+
+        .toast.error {
+            background-color: #c62828;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Aquí se inyectará el navbar -->
+    <div id="navbar"></div>
+
+    <main class="formulario">
+
+
+        <h1>Editar usuario</h1>
+        <br>
+        <h2>Modifique los datos necesarios</h2>
+
+
+        <form id="formEditar">
+            <fieldset>
+                <legend>Editar usuario</legend>
+
+
+                <div class="campo">
+                    <label for="nombre">NOMBRE:</label>
+                    <input type="text" id="nombre" name="nombre">
+                </div>
+
+
+                <div class="campo">
+                    <label for="apellido">APELLIDO:</label>
+                    <input type="text" id="apellido" name="apellido">
+                </div>
+
+
+                <div class="campo">
+                    <label for="fechaNacimiento">FECHA DE NACIMIENTO:</label>
+
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+                </div>
+
+                <div class="campo">
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" name="dni">
+                </div>
+
+                <div class="campo">
+                    <label for="celular">CELULAR:</label>
+                    <input type="tel" id="celular" name="celular">
+                </div>
+
+
+                <div class="campo">
+                    <label for="domicilio">DIRECCIÓN:</label>
+                    <input type="text" id="domicilio" name="domicilio">
+                </div>
+
+
+                <div class="campo">
+                    <label for="lesion">LESIÓN:</label>
+                    <input type="text" id="lesion" name="lesion">
+                </div>
+
+            </fieldset>
+        </form>
+
+<button type="button" id="btnGuardar" class="btn-matricular">Guardar cambios</button>
+
+
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script type="module" src="js/editarCliente.js"></script>
+    <script type="module" src="js/config.js"></script>
+    <script>
+        // Cargar el navbar desde navbar.html
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+            })
+            .catch(err => console.error("Error cargando navbar:", err));
+    </script>
+</body>
+
+</html>

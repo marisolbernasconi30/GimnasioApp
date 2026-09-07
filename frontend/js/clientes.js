@@ -146,20 +146,45 @@ function crearCliente() {
 }
 
 //PUT EDITAR CLIENTE
-function editarCliente() {
-
-
-}
 
 
 document.addEventListener("DOMContentLoaded", () => {
+
     const btnActivos = document.getElementById("btnActivos");
     const btnInactivos = document.getElementById("btnInactivos");
     const btnMatricular = document.getElementById("btnMatricular");
+    const tablaUsuarios = document.getElementById("usuarios");
 
-    if (btnActivos) btnActivos.addEventListener("click", listarClientes);
-    if (btnInactivos) btnInactivos.addEventListener("click", listarClientesInactivos);
-    if (btnMatricular) btnMatricular.addEventListener("click", crearCliente);
+    if (btnActivos) {
+        btnActivos.addEventListener("click", listarClientes);
+    }
+
+    if (btnInactivos) {
+        btnInactivos.addEventListener("click", listarClientesInactivos);
+    }
+
+    if (btnMatricular) {
+        btnMatricular.addEventListener("click", crearCliente);
+    }
+
+    // BOTÓN EDITAR
+    if (tablaUsuarios) {
+
+        tablaUsuarios.addEventListener("click", (event) => {
+
+            if (event.target.classList.contains("btn-editar")) {
+
+                const id = event.target.dataset.id;
+
+                console.log("ID a editar:", id);
+
+                window.location.href = `EditarUsuario.html?id=${id}`;
+            }
+
+        });
+
+    }
+
 });
 
 
