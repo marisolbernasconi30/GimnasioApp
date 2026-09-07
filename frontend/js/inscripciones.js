@@ -5,6 +5,7 @@ const cantidadPorPagina = 10;
 
 let totalPaginas = 0;
 
+
 const parametros = new URLSearchParams(window.location.search);
 const estado = parametros.get("estado");
 
@@ -41,6 +42,23 @@ async function cargarInscripciones() {
     }
 }
 
+document.getElementById("btnActivas").addEventListener("click", () => {
+
+    estadoActual = "activas";
+    paginaActual = 0;
+
+    cargarInscripciones();
+
+});
+
+document.getElementById("btnInactivas").addEventListener("click", () => {
+
+    estadoActual = "inactivas";
+    paginaActual = 0;
+
+    cargarInscripciones();
+
+});
 
 // ---------------------------------------------
 // BOTÓN SIGUIENTE
