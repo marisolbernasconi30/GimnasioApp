@@ -1,76 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuevo Pago</title>
-  <link rel="stylesheet" href="./css/global.css"> <!-- tu CSS -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Pago</title>
+    <link rel="stylesheet" href="./css/global.css">
+
 </head>
+
 <body>
-  
-  <!-- Aquí se inyectará el navbar -->
-  <div id="navbar"></div>
 
-  <form>
-            <fieldset>
-              <legend>Nuevo Pago</legend>
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
 
-                    <div class="campo">
-                        <label for="dni">DNI DEL USUARIO:</label>
-                        <input type="text" id="dni" name="dni">
-                    </div>
-            </fieldset>
+    <main class="formulario">
 
- <div class="item -4"> 
-           <fieldset>
-    
-            <legend ><b>Seleccione método de pago </b></legend>
+        <h1>Nuevo Pago</h1>
 
-            <table border="0">
-        
-            <tr>
-            <td>
-               <input type="radio" name="pago" > <label>Efectivo</label> 
-            </td>   
-            <td >
-             <input type="radio" name="pago" > <label>Transferencia</label> 
-            </td>
-            <td >
-             <input type="radio" name="pago" > <label>Tarjeta</label> 
-            </td>
-            <td >
-             <input type="radio" name="pago" > <label>Mercado Pago</label> 
-            </td>
-            </tr>
-           </table>
-     
-           </fieldset>  
+        <br>
+
+        <!-- BUSCAR CLIENTE -->
+        <fieldset>
+            <legend>Buscar usuario</legend>
+            <div class="campo">
+                <label for="dni">
+                    DNI DEL USUARIO:
+                </label>
+
+                <input  type="text" id="dni" name="dni" >
+
+                <button type="button" id="btnBuscar" >
+                    Buscar
+                </button>
+            </div>
+        </fieldset>
+
+
+        <!-- INFORMACIÓN DEL CLIENTE -->
+
+        <div id="datosCliente" style="display: none;" >
+            <h2>Usuario</h2>
+            <p>
+                <strong>Nombre:</strong>
+                <span id="nombreCliente"></span>
+            </p>
+            <p>
+                <strong>Apellido:</strong>
+                <span id="apellidoCliente"></span>
+            </p>
+            <p>
+                <strong>DNI:</strong>
+                <span id="dniCliente"></span>
+            </p>
         </div>
 
+        <br>
+
+        <!-- INSCRIPCIONES -->
+
+        <div id="contenedorInscripciones" style="display: none;" >
+            <h2>Inscripciones</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha baja</th>
+                        <th>Estado</th>
+                        <th>Seleccionar</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaInscripciones">
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <!-- DATOS DEL PAGO -->
+
+        <div id="datosPago"  style="display: none;"  >
             <fieldset>
-              <legend>INGRESE MONTO</legend>
+                <legend>Datos del pago</legend>
+                <!-- FECHA -->
 
-                    <div class="campo">
-                        <label for="monto">MONTO:</label>
-                        <input type="text" id="monto" name="monto">
-                    </div>
+                <div class="campo">
+                    <label for="fechaPago">
+                        FECHA DEL PAGO:
+                    </label>
+                    <input type="date" id="fechaPago" name="fechaPago" >
+                </div>
+
+                <!-- MONTO -->
+                <div class="campo">
+                    <label for="monto">
+                        MONTO:
+                    </label>
+                    <input  type="number"  id="monto"  name="monto"  min="0"  step="0.01">
+                </div>
             </fieldset>
- </form>
+
+            <!-- MÉTODO DE PAGO -->
+            <fieldset>
+                <legend>
+                    <b>Seleccione método de pago</b>
+                </legend>
+                <label>
+                    <input  type="radio" name="metodoPago" value="EFECTIVO" >
+                    Efectivo
+                </label>
+                <label>
+                    <input type="radio" name="metodoPago" value="TRANSFERENCIA" >
+                    Transferencia
+                </label>
+                <label>
+                    <input  type="radio" name="metodoPago" value="TARJETA" >
+                    Tarjeta
+                </label>
+                <label>
+                    <input  type="radio" name="metodoPago"   value="MERCADO_PAGO"   >
+                    Mercado Pago
+                </label>
+            </fieldset>
+
+            <br>
+
+            <!-- REGISTRAR -->
+
+            <button type="button" id="btnRegistrarPago" >
+                Registrar pago
+            </button>
+        </div>
+    </main>
 
 
+    <!-- JAVASCRIPT -->
 
+    <script type="module" src="js/pagos.js"></script>
 
+    <!-- NAVBAR -->
 
+    <script>
 
-        
-  <script>
-    // Cargar el navbar desde navbar.html
-    fetch("navbar.html")
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("navbar").innerHTML = data;
-      })
-      .catch(err => console.error("Error cargando navbar:", err));
-  </script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+
+            })
+
+            .catch(err => {
+                console.error(
+                    "Error cargando navbar:",
+                    err
+                );
+
+            });
+
+    </script>
+
 </body>
+
 </html>

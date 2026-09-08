@@ -30,6 +30,16 @@ public class PagoService {
         Inscripcion inscripcion = inscripcionRepository.findById(dto.getInscripcionId())
             .orElseThrow(() -> new RuntimeException("Inscripcion no encontrada"));
 
+            // COMPROBAR SI YA ESTÁ PAGADA
+
+        if (pagoRepository.existsByInscripcionId(
+                dto.getInscripcionId())) {
+
+            throw new RuntimeException(
+                "La inscripción ya está pagada"
+            );
+        }
+        
         Pago pago = new Pago(
             inscripcion,
             dto.getFechaPago(),

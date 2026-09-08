@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Inscripciones pagadas</title>
+
+</head>
+
+<body>
+
+      <!-- Aquí se inyectará el navbar -->
+  <div id="navbar"></div>
+
+    <h1>Inscripciones pagadas</h1>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID inscripción</th>
+                <th>Tipo de entrenamiento</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha de baja</th>
+                <th>Estado</th>
+                <th>Fecha de pago</th>
+                <th>Monto</th>
+                <th>Método de pago</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody id="tablaPagadas">
+
+        </tbody>
+
+    </table>
+
+
+    <script
+        type="module"
+        src="js/inscripcionesPagadas.js">
+    </script>
+<script>
+    // Cargar el navbar desde navbar.html
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      })
+      .catch(err => console.error("Error cargando navbar:", err));
+  </script>
+</body>
+
+</html>
