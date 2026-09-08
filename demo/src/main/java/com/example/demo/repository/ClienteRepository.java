@@ -1,7 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
-
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.Cliente;
 
@@ -14,5 +14,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 List<Cliente> findByActivoTrue(); //metodo para listar los clientes de alta 
 
 List<Cliente> findByActivoFalse(); //metodo para listar los clientes de baja
+ Optional<Cliente> findByDni(String dni);
 
 }

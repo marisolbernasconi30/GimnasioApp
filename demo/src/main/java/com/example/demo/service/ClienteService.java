@@ -80,4 +80,10 @@ public class ClienteService {
         .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
     }
+
+    public Cliente buscarPorDni(String dni) {
+
+    return clienteRepository.findByDni(dni)
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+}
 }
