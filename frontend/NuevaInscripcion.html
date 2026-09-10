@@ -14,6 +14,10 @@
 
 <body>
 
+      <!-- Aquí se inyectará el navbar -->
+  <div id="navbar"></div>
+
+
     <h1>Nueva inscripción</h1>
 
 
@@ -25,12 +29,7 @@
 
     <input type="text" id="dni" placeholder="Ingrese DNI">
 
-
-    <button type="button" id="btnBuscar">
-
-        Buscar
-
-    </button>
+    <button type="button" id="btnBuscar"> Buscar </button>
 
 
     <!-- DATOS DEL CLIENTE -->
@@ -63,12 +62,7 @@
 
         <h2>Crear inscripción</h2>
 
-
-        <label for="tipoEntrenamiento">
-
-            Tipo de entrenamiento:
-
-        </label>
+        <label for="tipoEntrenamiento">  Tipo de entrenamiento:  </label>
 
 
         <select id="tipoEntrenamiento">
@@ -98,34 +92,21 @@
 
         </select>
 
-
         <br><br>
 
-
-        <label for="fechaInicio">
-
-            Fecha de inicio:
-
-        </label>
+        <label for="fechaInicio"> Fecha de inicio: </label>
 
 
         <input type="date" id="fechaInicio">
 
-
         <br><br>
 
-
-        <button type="button" id="btnCrearInscripcion">
-
-            Crear inscripción
-
-        </button>
+        <button type="button" id="btnCrearInscripcion"> Crear inscripción </button>
 
     </div>
 
 
-    <script type="module" src="js/nuevaInscripcion.js">
-    </script>
+    <script type="module" src="js/nuevaInscripcion.js"> </script>
     <script>
         // Cargar el navbar desde navbar.html
         fetch("navbar.html")
@@ -135,7 +116,7 @@
             })
             .catch(err => console.error("Error cargando navbar:", err));
     </script>
-
+<script  type="module" src="js/config.js"></script>
 
 </body>
 
