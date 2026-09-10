@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class ClienteService {
         // Desactivar todas las inscripciones del cliente
         for (Inscripcion inscripcion : inscripciones) {
             inscripcion.setActiva(false);
-        
+            inscripcion.setFechaBaja(LocalDate.now());
         }
 
         inscripcionRepository.saveAll(inscripciones);

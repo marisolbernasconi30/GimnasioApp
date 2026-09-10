@@ -16,6 +16,22 @@
 <main class="contenedor-inscripciones">
    <h1 id="tituloInscripciones">Inscripciones</h1>
 
+
+   <div class="botones-estado">
+
+    <button id="btnVencidas">
+        Vencidas
+    </button>
+
+    <button id="btnPorVencer">
+        Por vencer
+    </button>
+
+    <button id="btnAlDia">
+        Al día
+    </button>
+
+</div>
 <div class="filtros-inscripciones">
 
     <button id="btnActivas">
@@ -27,6 +43,8 @@
     </button>
 
 </div>
+
+
         <!-- Tabla -->
 
 <div class="tabla-contenedor">
@@ -34,11 +52,14 @@
     <table id="tablaInscripciones">
         <thead>
             <tr>
-                <th>Estado</th>
-                <th>Tipo de Entrenamiento</th>
-                <th>Cliente ID</th>
-                <th>Fecha de Inicio</th>
-                <th>Fecha de Baja</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Entrenamiento</th>
+            <th>Inicio</th>
+            <th>Vencimiento</th>
+            <th>Estado</th>
+            <th>Pago</th>
             </tr>
         </thead>
         <tbody id="cuerpoTablaInscripciones">

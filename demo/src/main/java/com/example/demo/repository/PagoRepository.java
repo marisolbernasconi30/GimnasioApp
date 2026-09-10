@@ -9,5 +9,5 @@ import com.example.demo.entity.Pago;
 public interface PagoRepository extends JpaRepository<Pago, Long>{
 
     List<Pago> findByInscripcionId(Long inscripcionId);
-boolean existsByInscripcionId(Long inscripcionId);
+    boolean existsByInscripcionId(Long inscripcionId);
 }

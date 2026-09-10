@@ -13,18 +13,22 @@ import com.example.demo.entity.Inscripcion;
 import com.example.demo.entity.enums.TipoEntrenamiento;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.InscripcionRepository;
-
+import com.example.demo.dto.InscripcionResponseDTO;
+import com.example.demo.repository.PagoRepository;
 
 @Service
 public class InscripcionService {
 
     private final InscripcionRepository inscripcionRepository;
     private final ClienteRepository clienteRepository;
+    private final PagoRepository pagoRepository;
 
     public InscripcionService(InscripcionRepository inscripcionRepository,
-                              ClienteRepository clienteRepository) {
+                              ClienteRepository clienteRepository,
+                              PagoRepository pagoRepository) {
         this.inscripcionRepository = inscripcionRepository;
         this.clienteRepository = clienteRepository;
+        this.pagoRepository = pagoRepository;
     }
 
     // Crear una nueva inscripción
@@ -45,9 +49,19 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
-    public Page<Inscripcion> listar(Pageable pageable) {
-       return inscripcionRepository.findByActivaTrue(pageable);
-    }
+public Page<InscripcionResponseDTO> listar(Pageable pageable) {
+
+    Page<Inscripcion> pagina =
+            inscripcionRepository.findByActivaTrue(pageable);
+
+    return pagina.map(inscripcion -> {
+
+        boolean pagada =
+                pagoRepository.existsByInscripcionId(inscripcion.getId());
+
+        return new InscripcionResponseDTO(inscripcion, pagada);
+    });
+}
 
     //para obtener la lista por id
     public List<Inscripcion> obtenerInscripcionesCliente(Long clienteId) {
@@ -79,7 +93,71 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
-    public Page<Inscripcion> listarInscripInac(Pageable pageable) { //ME DEVUELVE TODAS LAS INSCRIPCIONES INACTIVAS 
-        return inscripcionRepository.findByActivaFalse(pageable);
-    }
+public Page<InscripcionResponseDTO> listarInscripInac(Pageable pageable) {
+
+    return inscripcionRepository.findByActivaFalse(pageable)
+            .map(inscripcion -> {
+
+                boolean pagada =
+                        pagoRepository.existsByInscripcionId(inscripcion.getId());
+
+                return new InscripcionResponseDTO(inscripcion, pagada);
+            });
+}
+
+public List<InscripcionResponseDTO> listarVencidas() {
+
+    LocalDate hoy = LocalDate.now();
+
+    return inscripcionRepository.findAll().stream()
+            .filter(Inscripcion::isActiva)
+            .filter(i -> i.getFechaVencimiento().isBefore(hoy))
+            .map(i -> {
+
+                boolean pagada =
+                        pagoRepository.existsByInscripcionId(i.getId());
+
+                return new InscripcionResponseDTO(i, pagada);
+            })
+            .toList();
+}
+public List<InscripcionResponseDTO> listarPorVencer() {
+
+    LocalDate hoy = LocalDate.now();
+    LocalDate limite = hoy.plusDays(7);
+
+    return inscripcionRepository.findAll().stream()
+            .filter(Inscripcion::isActiva)
+            .filter(i ->
+                    !i.getFechaVencimiento().isBefore(hoy)
+                    && !i.getFechaVencimiento().isAfter(limite)
+            )
+            .map(i -> {
+
+                boolean pagada =
+                        pagoRepository.existsByInscripcionId(i.getId());
+
+                return new InscripcionResponseDTO(i, pagada);
+            })
+            .toList();
+}
+public List<InscripcionResponseDTO> listarAlDia() {
+
+    LocalDate hoy = LocalDate.now();
+    LocalDate limite = hoy.plusDays(7);
+
+    return inscripcionRepository.findAll().stream()
+            .filter(Inscripcion::isActiva)
+            .filter(i ->
+                    i.getFechaVencimiento().isAfter(limite)
+            )
+            .map(i -> {
+
+                boolean pagada =
+                        pagoRepository.existsByInscripcionId(i.getId());
+
+                return new InscripcionResponseDTO(i, pagada);
+            })
+            .toList();
+}
 }
