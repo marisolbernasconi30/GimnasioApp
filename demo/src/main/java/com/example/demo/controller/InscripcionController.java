@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import com.example.demo.dto.InscripcionDTO;
+import com.example.demo.dto.InscripcionResponseDTO;
 import com.example.demo.entity.Inscripcion;
 import com.example.demo.entity.enums.TipoEntrenamiento;
 import com.example.demo.service.InscripcionService;
@@ -25,7 +26,7 @@ public class InscripcionController {
     // GET /inscripciones
     // Lista inscripciones ACTIVAS 
     @GetMapping
-    public Page<Inscripcion> listar(Pageable pageable){
+    public Page<InscripcionResponseDTO> listar(Pageable pageable){
         return inscripcionService.listar(pageable);
     }
 
@@ -33,7 +34,7 @@ public class InscripcionController {
 
      // Lista inscripciones INACTIVAS 
     @GetMapping ("/inactivas")
-    public Page<Inscripcion> listarInscripInac(Pageable pageable){
+    public Page<InscripcionResponseDTO> listarInscripInac(Pageable pageable){
         return inscripcionService.listarInscripInac(pageable);
     }
 
@@ -78,6 +79,19 @@ public List<Inscripcion> obtenerInscripcionesCliente(@PathVariable Long clienteI
 @PutMapping("/{id}/cancelar")
 public Inscripcion cancelar(@PathVariable Long id){
     return inscripcionService.cancelar(id);
+}
+
+@GetMapping("/vencidas")
+public List<InscripcionResponseDTO> listarVencidas() {
+    return inscripcionService.listarVencidas();
+}
+@GetMapping("/por-vencer")
+public List<InscripcionResponseDTO> listarPorVencer() {
+    return inscripcionService.listarPorVencer();
+}
+@GetMapping("/al-dia")
+public List<InscripcionResponseDTO> listarAlDia() {
+    return inscripcionService.listarAlDia();
 }
 
 }
