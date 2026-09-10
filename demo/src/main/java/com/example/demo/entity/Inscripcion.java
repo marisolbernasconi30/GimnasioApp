@@ -28,7 +28,8 @@ public class Inscripcion {
 
     private LocalDate fechaBaja;
 
-
+    private LocalDate fechaVencimiento;
+    
     private boolean activa = true;   
 
     public Inscripcion() {}
@@ -37,6 +38,7 @@ public class Inscripcion {
         this.cliente = cliente;
         this.tipoEntrenamiento = tipoEntrenamiento;
         this.fechaInicio = fechaInicio;
+        this.fechaVencimiento = fechaInicio.plusDays(30);
         this.activa = true;
     }
 
@@ -74,6 +76,14 @@ public class Inscripcion {
 
     public void setFechaBaja(LocalDate fechaBaja) {
         this.fechaBaja = fechaBaja;
+    }
+
+    public LocalDate getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(LocalDate fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
     public boolean isActiva() {
