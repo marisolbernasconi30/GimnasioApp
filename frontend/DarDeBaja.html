@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dar de Baja</title>
   <link rel="stylesheet" href="./css/global.css"> <!-- tu CSS -->
 </head>
+
 <body>
-  
+
   <!-- Aquí se inyectará el navbar -->
   <div id="navbar"></div>
 
-   <main class="formulario">
-
-       
-
-        <br>
-        <h2>Complete el formulario</h2>
+  <main class="formulario">
 
 
-        <form>
-            <fieldset>
-                <legend>Dar de baja usuario</legend>
+
+    <br>
+    <h2>Complete el formulario</h2>
 
 
-                    <div class="campo">
-                        <label for="dni">DNI:</label>
-                        <input type="text" id="dni" name="dni">
-                    </div>
+    <form>
+      <fieldset>
+        <legend>Dar de baja usuario</legend>
 
-                
-  </fieldset>
-</form>
 
-            <button type="submit" class="btn-matricular"> <!-- ver "btn-matricular"-->
-                Dar de baja usuario
-            </button>
-        
+        <div class="campo">
+          <label for="dni">DNI:</label>
+          <input type="text" id="dni" name="dni">
+        </div>
+        <button type="submit" class="btn-matricular"> <!-- ver "btn-matricular"-->
+          Dar de baja usuario
+        </button>
 
-    </main>
+      </fieldset>
+
+
+    </form>
+
+  </main>
 
 
   <script>
@@ -50,5 +51,7 @@
       })
       .catch(err => console.error("Error cargando navbar:", err));
   </script>
+  <script type="module" src="./js/darDeBaja.js"></script>
 </body>
+
 </html>
