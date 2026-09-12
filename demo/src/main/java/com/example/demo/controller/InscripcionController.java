@@ -68,7 +68,7 @@ public class InscripcionController {
 
   
 @GetMapping("/cliente/{clienteId}")
-public List<Inscripcion> obtenerInscripcionesCliente(@PathVariable Long clienteId){
+public List<InscripcionResponseDTO> obtenerInscripcionesCliente(@PathVariable Long clienteId){
     return inscripcionService.obtenerInscripcionesCliente(clienteId);
 }
 
