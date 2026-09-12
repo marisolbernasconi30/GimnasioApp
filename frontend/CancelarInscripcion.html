@@ -16,35 +16,83 @@
 
 <main class="formulario">
 
-       
-
         <br>
-        <h2>Complete el formulario</h2>
 
+        <h2>Dar de baja inscripción</h2>
 
-        <form>
+        <form id="formBuscar">
+
             <fieldset>
-                <legend>Cancelar Inscripción</legend>
 
-                    <div class="campo">
-                        <label for="dni">DNI:</label>
-                        <input type="text" id="dni" name="dni">
-                    </div>
+                <legend>Buscar usuario</legend>
 
+                <div class="campo">
 
+                    <label for="dni">DNI:</label>
 
-                
-  </fieldset>
-</form>
+                    <input
+                        type="text"
+                        id="dni"
+                        name="dni"
+                    >
 
-            <button type="submit" class="btn-matricular"> <!-- ver "btn-matricular"-->
-                Cancelar Inscripción
-            </button>
-        
+                </div>
+
+                <button type="submit" class="btn-matricular">
+                    Buscar usuario
+                </button>
+
+            </fieldset>
+
+        </form>
+
+        <!-- Datos del usuario -->
+        <section id="datosUsuario" style="display: none;">
+
+            <h3>Datos del usuario</h3>
+
+            <p>
+                <strong>Nombre:</strong>
+                <span id="nombreUsuario"></span>
+            </p>
+
+            <p>
+                <strong>Apellido:</strong>
+                <span id="apellidoUsuario"></span>
+            </p>
+
+            <p>
+                <strong>DNI:</strong>
+                <span id="dniUsuario"></span>
+            </p>
+
+        </section>
+
+        <!-- Inscripciones -->
+        <section id="contenedorInscripciones" style="display: none;">
+
+            <h3>Inscripciones</h3>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de vencimiento</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaInscripciones">
+                </tbody>
+
+            </table>
+
+        </section>
 
     </main>
-
-
 
   <script>
     // Cargar el navbar desde navbar.html
@@ -55,5 +103,8 @@
       })
       .catch(err => console.error("Error cargando navbar:", err));
   </script>
+
+  <script  type="module" src="./js/darDeBajaInscripcion.js"> </script>
+
 </body>
 </html>
