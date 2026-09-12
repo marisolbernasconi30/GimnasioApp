@@ -1,8 +1,8 @@
-import { CLIENTES_URL } from './config.js';
+import { CLIENTES_URL, INSCRIPCIONES_URL, PAGOS_URL } from './config.js';
 
 const parametros = new URLSearchParams(window.location.search);
 const idCliente = parametros.get("id");
-
+let inscripcionSeleccionadaFicha = null;
 // ---------------------------------------------
 // TOAST (mismo que en crearCliente)
 // ---------------------------------------------
@@ -82,7 +82,139 @@ function editarCliente() {
         });
 }
 
+// ---------------------------------------------
+// INSCRIPCIONES DEL CLIENTE
+// ---------------------------------------------
+async function cargarInscripcionesFicha() {
+
+    try {
+        const respuesta = await fetch(`${INSCRIPCIONES_URL}/cliente/${idCliente}`);
+        if (!respuesta.ok) throw new Error("Error al obtener inscripciones");
+
+        const inscripciones = await respuesta.json();
+        const cuerpo = document.getElementById("fichaInscripciones");
+        cuerpo.innerHTML = "";
+
+        const etiquetasPago = {
+            AL_DIA: "Al día",
+            POR_VENCER: "Por vencer",
+            VENCIDA: "Vencida"
+        };
+
+        inscripciones.forEach(inscripcion => {
+
+            const fila = document.createElement("tr");
+
+            const botonPago = inscripcion.estadoPago === "AL_DIA"
+                ? `<span>—</span>`
+                : `<button type="button" class="btn-pagar-ficha" data-id="${inscripcion.id}">Pagar</button>`;
+
+            fila.innerHTML = `
+                <td>${inscripcion.tipoEntrenamiento}</td>
+                <td>${inscripcion.fechaVencimiento}</td>
+                <td>${etiquetasPago[inscripcion.estadoPago]}</td>
+                <td><button type="button" class="btn-ver-pagos" data-id="${inscripcion.id}">Ver pagos</button></td>
+                <td>${botonPago}</td>
+            `;
+            cuerpo.appendChild(fila);
+        });
+
+    } catch (error) {
+        console.error(error);
+        mostrarToast("No se pudieron obtener las inscripciones", "error");
+    }
+}
+
+document.getElementById("fichaInscripciones").addEventListener("click", async (event) => {
+
+    // VER HISTORIAL DE PAGOS
+    if (event.target.classList.contains("btn-ver-pagos")) {
+
+        const inscripcionId = event.target.dataset.id;
+
+        try {
+            const respuesta = await fetch(`${PAGOS_URL}/inscripcion/${inscripcionId}`);
+            if (!respuesta.ok) throw new Error("Error al obtener pagos");
+
+            const pagos = await respuesta.json();
+
+            if (pagos.length === 0) {
+                alert("Esta inscripción todavía no tiene pagos registrados.");
+                return;
+            }
+
+            const detalle = pagos
+                .map(p => `${p.fechaPago} — $${p.monto} (${p.metodoPago})`)
+                .join("\n");
+
+            alert("Historial de pagos:\n\n" + detalle);
+
+        } catch (error) {
+            console.error(error);
+            mostrarToast("No se pudo obtener el historial de pagos", "error");
+        }
+    }
+
+    // SELECCIONAR INSCRIPCIÓN PARA PAGAR
+    if (event.target.classList.contains("btn-pagar-ficha")) {
+
+        inscripcionSeleccionadaFicha = Number(event.target.dataset.id);
+        document.getElementById("fichaFormPago").style.display = "block";
+
+        const hoy = new Date().toISOString().split("T")[0];
+        document.getElementById("fichaFechaPago").value = hoy;
+    }
+});
+
+// ---------------------------------------------
+// CONFIRMAR PAGO
+// ---------------------------------------------
+document.getElementById("btnConfirmarPagoFicha").addEventListener("click", async () => {
+
+    const fechaPago = document.getElementById("fichaFechaPago").value;
+    const monto = document.getElementById("fichaMonto").value;
+    const metodoSeleccionado = document.querySelector('input[name="fichaMetodoPago"]:checked');
+
+    if (!fechaPago || !monto || Number(monto) <= 0 || !metodoSeleccionado) {
+        mostrarToast("Complete todos los campos del pago", "error");
+        return;
+    }
+
+    const pago = {
+        inscripcionId: inscripcionSeleccionadaFicha,
+        fechaPago: fechaPago,
+        monto: Number(monto),
+        metodoPago: metodoSeleccionado.value
+    };
+
+    try {
+        const respuesta = await fetch(PAGOS_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(pago)
+        });
+
+        const data = await respuesta.json();
+
+        if (!respuesta.ok) {
+            throw new Error(data.mensaje || "Error al registrar el pago");
+        }
+
+        mostrarToast("Pago registrado correctamente", "exito");
+        document.getElementById("fichaFormPago").style.display = "none";
+        cargarInscripcionesFicha();
+
+    } catch (error) {
+        console.error(error);
+        mostrarToast(error.message, "error");
+    }
+});
+
+// ---------------------------------------------
+// EVENTOS Y CARGA INICIAL
+// ---------------------------------------------
+
 document.getElementById("btnGuardar").addEventListener("click", editarCliente);
 
 cargarCliente();
-
+cargarInscripcionesFicha();
