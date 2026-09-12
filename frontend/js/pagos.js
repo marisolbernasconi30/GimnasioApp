@@ -43,7 +43,7 @@ async function buscarCliente() {
         document.getElementById("dniCliente").textContent = cliente.dni;
         datosCliente.style.display = "block";
         // Buscamos sus inscripciones
-        await cargarInscripciones(cliente.id);
+        await cargarInscripciones(cliente.id); //aca hay un problema 
     } catch (error) {
         console.error(error);
         alert("No se encontró ningún usuario con ese DNI");
@@ -54,133 +54,64 @@ async function buscarCliente() {
 // CARGAR INSCRIPCIONES
 
 async function cargarInscripciones(clienteId) {
-
     try {
-
-        console.log("Buscando inscripciones del cliente:", clienteId);
-        const response = await fetch(
-            `${INSCRIPCIONES_URL}/cliente/${clienteId}`
-        );
-
-        if (!response.ok) {
-            throw new Error("Error al obtener las inscripciones");
-        }
-
+        const response = await fetch(`${INSCRIPCIONES_URL}/cliente/${clienteId}`);
+        if (!response.ok) throw new Error("Error al obtener las inscripciones");
         const inscripciones = await response.json();
-        console.log("Inscripciones:", inscripciones);
-
-        // Averiguamos cuáles ya tienen un pago
-        const inscripcionesConPago = await Promise.all(
-
-            inscripciones.map(async (inscripcion) => {
-
-                const responsePago = await fetch(
-                    `${PAGOS_URL}/inscripcion/${inscripcion.id}`
-                );
-
-                if (!responsePago.ok) {
-                    throw new Error(
-                        "Error al consultar el pago"
-                    );
-                }
-                const pagos = await responsePago.json();
-                return {
-                    ...inscripcion,
-                    pagada: pagos.length > 0
-                };
-            })
-        );
-
-        mostrarInscripciones(inscripcionesConPago);
-
+        mostrarInscripciones(inscripciones); // ya no hace falta "inscripcionesConPago"
     } catch (error) {
         console.error(error);
         alert("No se pudieron obtener las inscripciones");
     }
-
 }
 
 // MOSTRAR INSCRIPCIONES
 
 function mostrarInscripciones(inscripciones) {
-
     tablaInscripciones.innerHTML = "";
 
     if (inscripciones.length === 0) {
-
-        tablaInscripciones.innerHTML = `
-            <tr>
-                <td colspan="5">
-                    El usuario no tiene inscripciones.
-                </td>
-            </tr>
-        `;
+        tablaInscripciones.innerHTML = `<tr><td colspan="5">El usuario no tiene inscripciones.</td></tr>`;
         contenedorInscripciones.style.display = "block";
         return;
     }
 
-
     inscripciones.forEach(inscripcion => {
-
         const fila = document.createElement("tr");
 
-        // ESTADO
+        const etiquetas = {
+            AL_DIA: "ACTIVA",
+            POR_VENCER: "POR VENCER",
+            VENCIDA: "VENCIDA"
+        };
+        const estado = etiquetas[inscripcion.estadoPago];
 
-        let estado;
-
-        if (inscripcion.activa) {
-            estado = "ACTIVA";
-        } else {
-            estado = "VENCIDA";
-        }
-
-        // BOTÓN
-
-        let boton;
-
-if (inscripcion.pagada) {
-
-    boton = `
-        <span>
-            YA PAGADA
-        </span>
-    `;
-
-} else {
-
-    boton = `
-        <button type="button" class="btn-seleccionar"  data-id="${inscripcion.id}">
-            Seleccionar
-        </button>
-    `;
-
-}
-
-        // FILA
+        const boton = inscripcion.estadoPago === "AL_DIA"
+            ? `<span>YA PAGADA</span>`
+            : `<button type="button" class="btn-seleccionar" data-id="${inscripcion.id}">Seleccionar</button>`;
 
         fila.innerHTML = `
-
-            <td>
-                ${inscripcion.tipoEntrenamiento}
-            </td>
-            <td>
-                ${inscripcion.fechaInicio}
-            </td>
-            <td>
-                ${inscripcion.fechaBaja ?? "-"}
-            </td>
-            <td>
-                ${estado}
-            </td>
-            <td>
-                ${boton}
-            </td>
+            <td>${inscripcion.tipoEntrenamiento}</td>
+            <td>${inscripcion.fechaInicio}</td>
+            <td>${inscripcion.fechaBaja ?? "-"}</td>
+            <td>${estado}</td>
+            <td>${boton}</td>
         `;
         tablaInscripciones.appendChild(fila);
     });
 
-    contenedorInscripciones.style.display =
-        "block";
+    contenedorInscripciones.style.display = "block";
+}
+
+function fechaLocal(fechaString) {
+
+    const [año, mes, dia] = fechaString.split("-");
+
+    return new Date(
+        Number(año),
+        Number(mes) - 1,
+        Number(dia)
+    );
 }
 
 // SELECCIONAR INSCRIPCIÓN
@@ -295,37 +226,25 @@ async function registrarPago() {
     // POST
 
     try {
+        const response = await fetch(PAGOS_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(pago)
+        });
 
-        const response =
-            await fetch(
-                PAGOS_URL,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-                    body:
-                        JSON.stringify(pago)
-                }
-            );
-
+        const data = await response.json();
 
         if (!response.ok) {
-            throw new Error("Error al registrar el pago");
+            throw new Error(data.mensaje || "Error al registrar el pago");
         }
 
-        const nuevoPago = await response.json();
-        console.log("Pago registrado:", nuevoPago);
+        console.log("Pago registrado:", data);
         alert("Pago registrado correctamente");
-
-        // Limpiar formulario
         limpiarPago();
 
     } catch (error) {
-
         console.error("Error:", error);
-        alert("No se pudo registrar el pago");
+        alert(error.message);
     }
 }
 
