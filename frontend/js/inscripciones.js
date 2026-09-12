@@ -5,6 +5,7 @@ const cantidadPorPagina = 10;
 let totalPaginas = 0;
 
 let estadoActual = "activas";
+let modoListado = "paginado";
 
 async function cargarInscripciones() {
 
@@ -97,9 +98,12 @@ function mostrarInscripciones(inscripciones) {
         const estado = inscripcion.activa
             ? "Activa"
             : "Inactiva";
-        const pago = inscripcion.pagada
-            ? "Pagada"
-            : "Pendiente";
+        const etiquetasPago = {
+            AL_DIA: "Pagada",
+            POR_VENCER: "Por vencer",
+            VENCIDA: "Vencida"
+        };
+        const pago = etiquetasPago[inscripcion.estadoPago];
         fila.innerHTML = `
             <td>${inscripcion.nombreCliente}</td>
             <td>${inscripcion.apellidoCliente}</td>
@@ -119,10 +123,13 @@ function mostrarInscripciones(inscripciones) {
 function actualizarBotones() {
 
     const botonAnterior = document.getElementById("anterior");
-    const botonSiguiente =  document.getElementById("siguiente");
+    const botonSiguiente = document.getElementById("siguiente");
+    botonAnterior.style.display = "inline-block";
+    botonSiguiente.style.display = "inline-block";
     botonAnterior.disabled = paginaActual === 0;
     botonSiguiente.disabled = paginaActual >= totalPaginas - 1;
     const textoPagina = document.getElementById("paginaActual");
+    textoPagina.style.display = "inline";
     textoPagina.textContent = `Página ${paginaActual + 1} de ${totalPaginas}`;
 }
 
@@ -140,6 +147,7 @@ async function cargarVencidas() {
         }
         const inscripciones = await respuesta.json();
         mostrarInscripciones(inscripciones);
+        ocultarPaginacion();
     } catch (error) {
         console.error(error);
     }
@@ -155,6 +163,7 @@ async function cargarPorVencer() {
         }
         const inscripciones = await respuesta.json();
         mostrarInscripciones(inscripciones);
+        ocultarPaginacion();
     } catch (error) {
         console.error(error);
     }
@@ -170,13 +179,21 @@ async function cargarAlDia() {
         }
         const inscripciones = await respuesta.json();
         mostrarInscripciones(inscripciones);
+        ocultarPaginacion();
     } catch (error) {
         console.error(error);
     }
 }
-btnVencidas.addEventListener("click", () => { cargarVencidas();});
-btnPorVencer.addEventListener("click", () => { cargarPorVencer();});
-btnAlDia.addEventListener("click", () => { cargarAlDia();});
+btnVencidas.addEventListener("click", () => { cargarVencidas(); });
+btnPorVencer.addEventListener("click", () => { cargarPorVencer(); });
+btnAlDia.addEventListener("click", () => { cargarAlDia(); });
+
+function ocultarPaginacion() {
+
+    document.getElementById("anterior").style.display = "none";
+    document.getElementById("siguiente").style.display = "none";
+    document.getElementById("paginaActual").style.display = "none";
+}
 
 // CARGAR PRIMERA PÁGINA
 cargarInscripciones();
