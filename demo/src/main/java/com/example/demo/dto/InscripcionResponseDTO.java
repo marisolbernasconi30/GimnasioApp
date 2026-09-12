@@ -3,7 +3,9 @@ package com.example.demo.dto;
 import java.time.LocalDate;
 
 import com.example.demo.entity.Inscripcion;
+import com.example.demo.entity.enums.EstadoPago;
 import com.example.demo.entity.enums.TipoEntrenamiento;
+import com.example.demo.service.PagoEstadoCalculator;
 
 public class InscripcionResponseDTO {
 
@@ -19,10 +21,10 @@ public class InscripcionResponseDTO {
     private LocalDate fechaVencimiento;
     private LocalDate fechaBaja;
 
-    private boolean activa;
-    private boolean pagada;
-
-    public InscripcionResponseDTO(Inscripcion inscripcion, boolean pagada) {
+    private boolean activa; // sigue existiendo: significa "no cancelada"
+    private EstadoPago estadoPago; // NUEVO: reemplaza a "pagada"
+    
+    public InscripcionResponseDTO(Inscripcion inscripcion) {
 
         this.id = inscripcion.getId();
 
@@ -37,7 +39,9 @@ public class InscripcionResponseDTO {
         this.fechaBaja = inscripcion.getFechaBaja();
 
         this.activa = inscripcion.isActiva();
-        this.pagada = pagada;
+        this.estadoPago = PagoEstadoCalculator.calcular(
+                inscripcion.getFechaVencimiento(), LocalDate.now()
+        );
     }
 
 
@@ -95,11 +99,11 @@ public class InscripcionResponseDTO {
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
-    public boolean isPagada() {
-        return pagada;
+
+    public EstadoPago getEstadoPago() {
+        return estadoPago;
     }
-    public void setPagada(boolean pagada) {
-        this.pagada = pagada;
+    public void setEstadoPago(EstadoPago estadoPago){
     }
-    
+
 }
