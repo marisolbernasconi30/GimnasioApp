@@ -38,7 +38,7 @@ public class Inscripcion {
         this.cliente = cliente;
         this.tipoEntrenamiento = tipoEntrenamiento;
         this.fechaInicio = fechaInicio;
-        this.fechaVencimiento = fechaInicio.plusDays(30);
+        this.fechaVencimiento = fechaInicio.plusMonths(1);
         this.activa = true;
     }
 
