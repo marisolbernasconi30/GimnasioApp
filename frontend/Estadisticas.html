@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas</title>
+    <link rel="stylesheet" href="./css/global.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <main class="formulario">
+
+        <h1>Estadísticas del mes</h1>
+
+        <br>
+
+        <div class="tarjetas-resumen">
+
+            <div class="tarjeta">
+                <span class="tarjeta-icono icono-verde">👤</span>
+                <span class="tarjeta-numero" id="porcentajeNuevos">—</span>
+                <span class="tarjeta-etiqueta">Clientes nuevos este mes</span>
+            </div>
+
+            <div class="tarjeta">
+                <span class="tarjeta-icono icono-alerta">🚪</span>
+                <span class="tarjeta-numero" id="porcentajeBaja">—</span>
+                <span class="tarjeta-etiqueta">Bajas este mes</span>
+            </div>
+
+            <div class="tarjeta">
+                <span class="tarjeta-icono icono-azul">💰</span>
+                <span class="tarjeta-numero" id="totalRecaudado">—</span>
+                <span class="tarjeta-etiqueta">Recaudado este mes</span>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="tarjeta-detalle">
+            <h2>Inscriptos por tipo de entrenamiento</h2>
+            <div id="listaTipos"></div>
+        </div>
+
+        <br>
+
+        <div class="tarjeta-detalle" id="detalleTipo" style="display: none;">
+            <h2>Inscriptos en <span id="nombreTipoDetalle"></span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                        <th>Estado de pago</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaDetalleTipo"></tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <script type="module" src="js/estadisticas.js"></script>
+
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+            })
+            .catch(err => console.error("Error cargando navbar:", err));
+    </script>
+
+</body>
+
+</html>

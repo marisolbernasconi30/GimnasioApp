@@ -100,11 +100,21 @@ async function cargarInscripcionesFicha() {
             POR_VENCER: "Por vencer",
             VENCIDA: "Vencida"
         };
+        const clasesBadge = {
+            AL_DIA: "badge-al-dia",
+            POR_VENCER: "badge-por-vencer",
+            VENCIDA: "badge-vencida"
+        };
 
         inscripciones.forEach(inscripcion => {
 
             const fila = document.createElement("tr");
 
+            const badge = `
+                <span class="badge-estado ${clasesBadge[inscripcion.estadoPago]}">
+                    ${etiquetasPago[inscripcion.estadoPago]}
+                </span>
+            `;
             const botonPago = inscripcion.estadoPago === "AL_DIA"
                 ? `<span>—</span>`
                 : `<button type="button" class="btn-pagar-ficha" data-id="${inscripcion.id}">Pagar</button>`;

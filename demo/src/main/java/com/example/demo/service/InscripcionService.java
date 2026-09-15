@@ -58,13 +58,18 @@ public class InscripcionService {
 
     // -------------------------------------
 
-    public List<Inscripcion> listarActivasPorTipo(TipoEntrenamiento tipo) {
-        return inscripcionRepository.findByTipoEntrenamientoAndActivaTrue(tipo);
-    }
+public List<InscripcionResponseDTO> listarActivasPorTipo(TipoEntrenamiento tipo) {
+    return inscripcionRepository.findByTipoEntrenamientoAndActivaTrue(tipo).stream()
+            .map(InscripcionResponseDTO::new)
+            .toList();
+}
 
-    public List<Inscripcion> listarInactivasPorTipo(TipoEntrenamiento tipo) {
-        return inscripcionRepository.findByTipoEntrenamientoAndActivaFalse(tipo);
-    }
+public List<InscripcionResponseDTO> listarInactivasPorTipo(TipoEntrenamiento tipo) {
+    return inscripcionRepository.findByTipoEntrenamientoAndActivaFalse(tipo).stream()
+            .map(InscripcionResponseDTO::new)
+            .toList();
+}
+
 
     // -------------------------------------
 

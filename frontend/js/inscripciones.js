@@ -78,8 +78,7 @@ document.getElementById("anterior").addEventListener("click", () => {
 
 function mostrarInscripciones(inscripciones) {
 
-    const cuerpo =
-        document.getElementById("cuerpoTablaInscripciones");
+    const cuerpo = document.getElementById("cuerpoTablaInscripciones");
     cuerpo.innerHTML = "";
     if (inscripciones.length === 0) {
         cuerpo.innerHTML = `
@@ -94,16 +93,28 @@ function mostrarInscripciones(inscripciones) {
 
     inscripciones.forEach(inscripcion => {
 
-        const fila = document.createElement("tr");
-        const estado = inscripcion.activa
-            ? "Activa"
-            : "Inactiva";
-        const etiquetasPago = {
-            AL_DIA: "Pagada",
-            POR_VENCER: "Por vencer",
-            VENCIDA: "Vencida"
-        };
-        const pago = etiquetasPago[inscripcion.estadoPago];
+            const fila = document.createElement("tr");
+    const estado = inscripcion.activa
+        ? "Activa"
+        : "Inactiva";
+
+    const etiquetasPago = {
+        AL_DIA: "Pagada",
+        POR_VENCER: "Por vencer",
+        VENCIDA: "Vencida"
+    };
+
+    const clasesBadge = {
+        AL_DIA: "badge-al-dia",
+        POR_VENCER: "badge-por-vencer",
+        VENCIDA: "badge-vencida"
+    };
+
+    const pago = `
+        <span class="badge-estado ${clasesBadge[inscripcion.estadoPago]}">
+            ${etiquetasPago[inscripcion.estadoPago]}
+        </span>
+    `;
         fila.innerHTML = `
             <td>${inscripcion.nombreCliente}</td>
             <td>${inscripcion.apellidoCliente}</td>

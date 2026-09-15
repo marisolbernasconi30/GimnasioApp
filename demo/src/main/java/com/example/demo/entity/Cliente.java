@@ -31,16 +31,16 @@ public class Cliente {
 
     private boolean activo = true;
 
-  //  @JsonManagedReference
-   // @OneToMany(mappedBy = "cliente")
-   // private List<Inscripcion> inscripciones;
+    private LocalDate fechaAltaCliente;
+    private LocalDate fechaBajaCliente;
 
     // Constructor vacío (OBLIGATORIO para JPA)
     public Cliente() {
     }
 
     // Constructor sin ID (buena práctica)
-    public Cliente(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String celular, String domicilio, String lesion) {
+    public Cliente(String nombre, String apellido, String dni, LocalDate fechaNacimiento, String celular,
+            String domicilio, String lesion , LocalDate fechaAltaCliente, LocalDate fechaBajaCliente) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -48,6 +48,9 @@ public class Cliente {
         this.celular = celular;
         this.domicilio = domicilio;
         this.lesion = lesion;
+        this.fechaAltaCliente = fechaAltaCliente;
+        this.fechaBajaCliente = fechaBajaCliente;
+
     }
 
     // Getters y Setters
@@ -76,11 +79,11 @@ public class Cliente {
         this.apellido = apellido;
     }
 
-    public String getDni(){
-         return dni; 
+    public String getDni() {
+        return dni;
     }
 
-    public void setDni(String dni){
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -117,11 +120,26 @@ public class Cliente {
     }
 
     public boolean isActivo() {
-    return activo;
+        return activo;
     }
 
     public void setActivo(boolean activo) {
-     this.activo = activo;
+        this.activo = activo;
+    }
+
+    public LocalDate getFechaAltaCliente() {
+        return fechaAltaCliente;
+    }
+
+    public void setFechaAltaCliente(LocalDate fechaAltaCliente) {
+        this.fechaAltaCliente = fechaAltaCliente;
+    }
+
+    public LocalDate getFechaBajaCliente() {
+        return fechaAltaCliente;
+    }
+
+    public void setFechaBajaCliente(LocalDate fechaBajaCliente) {
+        this.fechaBajaCliente = fechaBajaCliente;
     }
 }
-

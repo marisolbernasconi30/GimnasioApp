@@ -14,7 +14,7 @@ import com.example.demo.service.InscripcionService;
 
 @RestController
 @RequestMapping("/inscripciones")
-@CrossOrigin(origins = "http://localhost:5173")
+
 public class InscripcionController {
 
     private final InscripcionService inscripcionService;
@@ -42,12 +42,12 @@ public class InscripcionController {
  
   
     @GetMapping("/tipo/{tipo}/activas")
-    public List<Inscripcion> listarActivasPorTipo(@PathVariable TipoEntrenamiento tipo) {
+    public List<InscripcionResponseDTO> listarActivasPorTipo(@PathVariable TipoEntrenamiento tipo) {
         return inscripcionService.listarActivasPorTipo(tipo);
     }
 
     @GetMapping("/tipo/{tipo}/inactivas")
-    public List<Inscripcion> listarInactivasPorTipo(@PathVariable TipoEntrenamiento tipo) {
+    public List<InscripcionResponseDTO> listarInactivasPorTipo(@PathVariable TipoEntrenamiento tipo) {
         return inscripcionService.listarInactivasPorTipo(tipo);
     }
    

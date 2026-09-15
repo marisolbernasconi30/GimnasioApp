@@ -65,6 +65,18 @@ async function cargarInscripciones(clienteId) {
     }
 }
 
+const etiquetasPago = {
+    AL_DIA: "Al día",
+    POR_VENCER: "Por vencer",
+    VENCIDA: "Vencida"
+};
+
+const clasesBadge = {
+    AL_DIA: "badge-al-dia",
+    POR_VENCER: "badge-por-vencer",
+    VENCIDA: "badge-vencida"
+};
+
 // MOSTRAR INSCRIPCIONES
 
 function mostrarInscripciones(inscripciones) {
@@ -76,19 +88,31 @@ function mostrarInscripciones(inscripciones) {
         return;
     }
 
+    const etiquetas = {
+        AL_DIA: "ACTIVA",
+        POR_VENCER: "POR VENCER",
+        VENCIDA: "VENCIDA"
+    };
+
+    const clasesBadge = {
+        AL_DIA: "badge-al-dia",
+        POR_VENCER: "badge-por-vencer",
+        VENCIDA: "badge-vencida"
+    };
+
     inscripciones.forEach(inscripcion => {
         const fila = document.createElement("tr");
 
-        const etiquetas = {
-            AL_DIA: "ACTIVA",
-            POR_VENCER: "POR VENCER",
-            VENCIDA: "VENCIDA"
-        };
-        const estado = etiquetas[inscripcion.estadoPago];
+        const estado = `
+            <span class="badge-estado ${clasesBadge[inscripcion.estadoPago]}">
+                ${etiquetas[inscripcion.estadoPago]}
+            </span>
+        `;
 
         const boton = inscripcion.estadoPago === "AL_DIA"
             ? `<span>YA PAGADA</span>`
             : `<button type="button" class="btn-seleccionar" data-id="${inscripcion.id}">Seleccionar</button>`;
+
 
         fila.innerHTML = `
             <td>${inscripcion.tipoEntrenamiento}</td>
@@ -169,19 +193,14 @@ async function registrarPago() {
 
     // COMPROBAR INSCRIPCIÓN
 
-    if (
-        inscripcionSeleccionada === null
-    ) {
+    if (inscripcionSeleccionada === null) {
         alert("Seleccione una inscripción");
         return;
     }
 
     // FECHA
 
-    const fechaPago =
-        document.getElementById(
-            "fechaPago"
-        ).value;
+    const fechaPago = document.getElementById("fechaPago").value;
 
     if (fechaPago === "") {
         alert("Ingrese la fecha del pago");
@@ -190,19 +209,16 @@ async function registrarPago() {
 
     // MONTO
 
-    const monto =
-        document.getElementById("monto").value;
+    const monto = document.getElementById("monto").value;
 
-    if (monto === "" || Number(monto) <= 0
-    ) {
+    if (monto === "" || Number(monto) <= 0) {
         alert("Ingrese un monto válido");
         return;
     }
 
     // MÉTODO DE PAGO
 
-    const metodoSeleccionado =
-        document.querySelector('input[name="metodoPago"]:checked');
+    const metodoSeleccionado = document.querySelector('input[name="metodoPago"]:checked');
 
     if (!metodoSeleccionado) {
         alert("Seleccione un método de pago");
@@ -213,12 +229,10 @@ async function registrarPago() {
 
     // OBJETO QUE MANDAREMOS AL BACKEND
     const pago = {
-
         inscripcionId: inscripcionSeleccionada,
         fechaPago: fechaPago,
         monto: Number(monto),
         metodoPago: metodoPago
-
     };
 
     console.log("Pago que voy a enviar:", pago);
@@ -241,7 +255,10 @@ async function registrarPago() {
         console.log("Pago registrado:", data);
         alert("Pago registrado correctamente");
         limpiarPago();
-
+        // recargar inscripciones para reflejar el nuevo estado
+        if (clienteActual) {
+            await cargarInscripciones(clienteActual.id);
+        }
     } catch (error) {
         console.error("Error:", error);
         alert(error.message);
@@ -254,17 +271,12 @@ function limpiarPago() {
 
     inscripcionSeleccionada = null;
 
-    document.getElementById(
-        "monto"
-    ).value = "";
+    document.getElementById("monto").value = "";
 
-    document.querySelectorAll(
-        'input[name="metodoPago"]'
-    ).forEach(radio => {
+    document.querySelectorAll('input[name="metodoPago"]').forEach(radio => {
         radio.checked = false;
     });
-    datosPago.style.display =
-        "none";
+    datosPago.style.display = "none";
 }
 
 // EVENTOS
