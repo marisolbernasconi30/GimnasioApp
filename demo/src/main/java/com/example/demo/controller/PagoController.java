@@ -10,7 +10,7 @@ import com.example.demo.service.PagoService;
 
 @RestController
 @RequestMapping("/pagos")
-@CrossOrigin(origins = "http://localhost:5173")
+
 public class PagoController {
 
     private final PagoService pagoService;
