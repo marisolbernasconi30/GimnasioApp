@@ -23,7 +23,8 @@ import java.util.List;
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) }) // para que la tabla se
                                                                                                 // llame users y no
                                                                                                 // user, ya que user es
-                                                                                                // una palabra reservada                                                                                                // en sql
+                                                                                                // una palabra reservada
+                                                                                                // // en sql
 
 public class User implements UserDetails {
 
@@ -38,6 +39,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING) // para que se guarde el nombre del enum y no el numero, ya que si se guarda el
                                  // numero, si se cambia el orden de los enums, se rompe la aplicacion
     Role role;
+
+    private boolean activo = true;
 
     // -------------------------------------------------------
     public User() {
@@ -102,6 +105,14 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     // -------------------------------------------------------
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -129,18 +140,18 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true; // para que la cuenta no este deshabilitada, ya que si esta deshabilitada, el
+        return activo; // para que la cuenta no este deshabilitada, ya que si esta deshabilitada, el
                      // usuario no puede loguearse
     }
 
     @Override
     public @Nullable String getPassword() {
-       return password; //checkear
+        return password; // checkear
     }
 
     @Override
     public String getUsername() {
-        return username; //checkear
+        return username; // checkear
     }
 
 }
