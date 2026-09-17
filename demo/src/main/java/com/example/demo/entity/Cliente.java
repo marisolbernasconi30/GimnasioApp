@@ -136,7 +136,7 @@ public class Cliente {
     }
 
     public LocalDate getFechaBajaCliente() {
-        return fechaAltaCliente;
+        return fechaBajaCliente;
     }
 
     public void setFechaBajaCliente(LocalDate fechaBajaCliente) {

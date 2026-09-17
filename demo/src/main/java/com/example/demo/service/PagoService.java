@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 import com.example.demo.dto.PagoDTO;
 import com.example.demo.entity.Inscripcion;
 import com.example.demo.entity.Pago;
