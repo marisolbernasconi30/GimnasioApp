@@ -68,14 +68,7 @@
 
     <script type="module" src="js/estadisticas.js"></script>
 
-    <script>
-        fetch("navbar.html")
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-            })
-            .catch(err => console.error("Error cargando navbar:", err));
-    </script>
+ <script type="module" src="js/navbar-loader.js"></script>
 
 </body>
 

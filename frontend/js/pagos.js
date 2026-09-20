@@ -1,5 +1,4 @@
-import { PAGOS_URL, CLIENTES_URL, INSCRIPCIONES_URL } from './config.js';
-
+import { PAGOS_URL, CLIENTES_URL, INSCRIPCIONES_URL, apiFetch, protegerPagina } from './config.js';
 // VARIABLES
 
 let clienteActual = null;
@@ -27,9 +26,7 @@ async function buscarCliente() {
 
     try {
         console.log("Buscando cliente con DNI:", dni);
-        const response = await fetch(
-            `${CLIENTES_URL}/dni/${dni}`
-        );
+        const response = await apiFetch(`${CLIENTES_URL}/dni/${dni}`);
         if (!response.ok) {
             throw new Error("Cliente no encontrado");
         }
@@ -55,7 +52,7 @@ async function buscarCliente() {
 
 async function cargarInscripciones(clienteId) {
     try {
-        const response = await fetch(`${INSCRIPCIONES_URL}/cliente/${clienteId}`);
+        const response = await apiFetch(`${INSCRIPCIONES_URL}/cliente/${clienteId}`);
         if (!response.ok) throw new Error("Error al obtener las inscripciones");
         const inscripciones = await response.json();
         mostrarInscripciones(inscripciones); // ya no hace falta "inscripcionesConPago"
@@ -75,7 +72,7 @@ const clasesBadge = {
     AL_DIA: "badge-al-dia",
     POR_VENCER: "badge-por-vencer",
     VENCIDA: "badge-vencida"
-};
+}; 
 
 // MOSTRAR INSCRIPCIONES
 

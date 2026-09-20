@@ -1,18 +1,14 @@
-import { CLIENTES_URL } from './config.js';
+import { CLIENTES_URL, apiFetch, protegerPagina } from './config.js';
+
+protegerPagina();
 
 const url = CLIENTES_URL;
 
 // Obtener clientes activos
 function listarClientes() {
 
-    console.log("1. Ejecutando listarClientes()");
-    console.log("2. URL:", CLIENTES_URL);
-
-    fetch(CLIENTES_URL)
+    apiFetch(CLIENTES_URL)
         .then(response => {
-
-            console.log("3. Respuesta recibida:", response);
-            console.log("4. Status:", response.status);
 
             if (!response.ok) {
                 throw new Error("HTTP error: " + response.status);
@@ -22,12 +18,7 @@ function listarClientes() {
         })
         .then(usuarios => {
 
-            console.log("5. Usuarios recibidos:", usuarios);
-            console.log("6. Cantidad:", usuarios.length);
-
             const tabla = document.getElementById("usuarios");
-
-            console.log("7. Tabla encontrada:", tabla);
 
             tabla.innerHTML = "";
 
@@ -60,11 +51,9 @@ function listarClientes() {
 // Obtener clientes inactivos   
 function listarClientesInactivos() {
 
-    fetch(url+"/baja")
+    apiFetch(url + "/baja")
         .then(response => response.json())
         .then(usuarios => {
-
-            console.log(usuarios);
 
             const tabla = document.getElementById("usuarios");
 
@@ -119,9 +108,7 @@ function crearCliente() {
         lesion
     };
 
-    console.log("Voy a enviar:", cliente);
-
-    fetch(url, {
+    apiFetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -135,7 +122,6 @@ function crearCliente() {
             return response.json();
         })
         .then(data => {
-            console.log("Cliente creado:", data);
             mostrarToast("Cliente registrado con éxito", "exito");
             document.querySelector("form").reset();
         })
@@ -146,7 +132,6 @@ function crearCliente() {
 }
 
 //PUT EDITAR CLIENTE
-
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -175,9 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (event.target.classList.contains("btn-editar")) {
 
                 const id = event.target.dataset.id;
-
-                console.log("ID a editar:", id);
-
                 window.location.href = `EditarUsuario.html?id=${id}`;
             }
 
@@ -186,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-
 
 function mostrarToast(mensaje, tipo) {
     const toast = document.getElementById("toast");

@@ -1,4 +1,6 @@
-import { INSCRIPCIONES_URL } from './config.js';
+import { INSCRIPCIONES_URL, apiFetch, protegerPagina } from './config.js';
+
+protegerPagina();
 
 let paginaActual = 0;
 const cantidadPorPagina = 10;
@@ -19,7 +21,7 @@ async function cargarInscripciones() {
 
     try {
 
-        const respuesta = await fetch(url);
+        const respuesta = await apiFetch(url);
 
         if (!respuesta.ok) {
             throw new Error("Error al obtener las inscripciones");
@@ -93,28 +95,29 @@ function mostrarInscripciones(inscripciones) {
 
     inscripciones.forEach(inscripcion => {
 
-            const fila = document.createElement("tr");
-    const estado = inscripcion.activa
-        ? "Activa"
-        : "Inactiva";
+        const fila = document.createElement("tr");
+        const estado = inscripcion.activa
+            ? "Activa"
+            : "Inactiva";
 
-    const etiquetasPago = {
-        AL_DIA: "Pagada",
-        POR_VENCER: "Por vencer",
-        VENCIDA: "Vencida"
-    };
+        const etiquetasPago = {
+            AL_DIA: "Pagada",
+            POR_VENCER: "Por vencer",
+            VENCIDA: "Vencida"
+        };
 
-    const clasesBadge = {
-        AL_DIA: "badge-al-dia",
-        POR_VENCER: "badge-por-vencer",
-        VENCIDA: "badge-vencida"
-    };
+        const clasesBadge = {
+            AL_DIA: "badge-al-dia",
+            POR_VENCER: "badge-por-vencer",
+            VENCIDA: "badge-vencida"
+        };
 
-    const pago = `
-        <span class="badge-estado ${clasesBadge[inscripcion.estadoPago]}">
-            ${etiquetasPago[inscripcion.estadoPago]}
-        </span>
-    `;
+        const pago = `
+            <span class="badge-estado ${clasesBadge[inscripcion.estadoPago]}">
+                ${etiquetasPago[inscripcion.estadoPago]}
+            </span>
+        `;
+
         fila.innerHTML = `
             <td>${inscripcion.nombreCliente}</td>
             <td>${inscripcion.apellidoCliente}</td>
@@ -150,9 +153,7 @@ const btnAlDia = document.getElementById("btnAlDia");
 
 async function cargarVencidas() {
     try {
-        const respuesta = await fetch(
-            `${INSCRIPCIONES_URL}/vencidas`
-        );
+        const respuesta = await apiFetch(`${INSCRIPCIONES_URL}/vencidas`);
         if (!respuesta.ok) {
             throw new Error("Error al obtener inscripciones vencidas");
         }
@@ -163,12 +164,11 @@ async function cargarVencidas() {
         console.error(error);
     }
 }
+
 async function cargarPorVencer() {
 
     try {
-        const respuesta = await fetch(
-            `${INSCRIPCIONES_URL}/por-vencer`
-        );
+        const respuesta = await apiFetch(`${INSCRIPCIONES_URL}/por-vencer`);
         if (!respuesta.ok) {
             throw new Error("Error al obtener inscripciones por vencer");
         }
@@ -179,12 +179,11 @@ async function cargarPorVencer() {
         console.error(error);
     }
 }
+
 async function cargarAlDia() {
 
     try {
-        const respuesta = await fetch(
-            `${INSCRIPCIONES_URL}/al-dia`
-        );
+        const respuesta = await apiFetch(`${INSCRIPCIONES_URL}/al-dia`);
         if (!respuesta.ok) {
             throw new Error("Error al obtener inscripciones al día");
         }
@@ -195,6 +194,7 @@ async function cargarAlDia() {
         console.error(error);
     }
 }
+
 btnVencidas.addEventListener("click", () => { cargarVencidas(); });
 btnPorVencer.addEventListener("click", () => { cargarPorVencer(); });
 btnAlDia.addEventListener("click", () => { cargarAlDia(); });

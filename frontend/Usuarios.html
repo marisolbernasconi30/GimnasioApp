@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="./css/global.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <main class="formulario">
+
+        <h1>Usuarios del sistema</h1>
+
+        <br>
+
+        <fieldset>
+            <legend>Crear nuevo usuario</legend>
+
+            <div class="campo">
+                <label for="username">USUARIO:</label>
+                <input type="text" id="username">
+            </div>
+            <div class="campo">
+                <label for="password">CONTRASEÑA:</label>
+                <input type="password" id="password">
+            </div>
+            <div class="campo">
+                <label for="firstname">NOMBRE:</label>
+                <input type="text" id="firstname">
+            </div>
+            <div class="campo">
+                <label for="lastname">APELLIDO:</label>
+                <input type="text" id="lastname">
+            </div>
+            <div class="campo">
+                <label for="role">ROL:</label>
+                <select id="role">
+                    <option value="USER">Recepcionista (USER)</option>
+                    <option value="ADMIN">Administrador (ADMIN)</option>
+                </select>
+            </div>
+
+            <button type="button" id="btnCrearUsuario">Crear usuario</button>
+        </fieldset>
+
+        <br>
+
+        <h2>Usuarios existentes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tablaUsuarios"></tbody>
+        </table>
+
+    </main>
+
+    <script type="module" src="js/usuarios.js"></script>
+    <script type="module" src="js/navbar-loader.js"></script>
+
+</body>
+
+</html>

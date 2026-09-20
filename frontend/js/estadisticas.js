@@ -1,4 +1,6 @@
-import { ESTADISTICAS_URL, INSCRIPCIONES_URL } from './config.js';
+import { ESTADISTICAS_URL, INSCRIPCIONES_URL, apiFetch, protegerPagina } from './config.js';
+
+protegerPagina();
 
 const etiquetasPago = {
     AL_DIA: "Al día",
@@ -19,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
 async function cargarEstadisticas() {
 
     try {
-        const respuesta = await fetch(ESTADISTICAS_URL);
+        const respuesta = await apiFetch(ESTADISTICAS_URL);
         if (!respuesta.ok) throw new Error("Error al obtener estadísticas");
 
         const datos = await respuesta.json();
 
         document.getElementById("porcentajeNuevos").textContent =
-            datos.porcentajeClientesNuevos.toFixed(1) + "%";
+            datos.porcentajeClienteNuevo.toFixed(1) + "%";
 
         document.getElementById("porcentajeBaja").textContent =
             datos.porcentajeClientesBaja.toFixed(1) + "%";
@@ -33,7 +35,7 @@ async function cargarEstadisticas() {
         document.getElementById("totalRecaudado").textContent =
             datos.totalRecaudado.toLocaleString("es-AR");
 
-        mostrarTabalTipos(datos.porcentajePorTipoEntrenamiento);
+        mostrarTabalTipos(datos.porcentajeEntrenamiento);
 
     } catch (error) {
         console.error(error);
@@ -71,7 +73,7 @@ document.getElementById("listaTipos").addEventListener("click", async (event) =>
     const tipo = boton.dataset.tipo;
 
     try {
-        const respuesta = await fetch(`${INSCRIPCIONES_URL}/tipo/${tipo}/activas`);
+        const respuesta = await apiFetch(`${INSCRIPCIONES_URL}/tipo/${tipo}/activas`);
         if (!respuesta.ok) throw new Error("Error al obtener inscriptos");
 
         const inscripciones = await respuesta.json();

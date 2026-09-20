@@ -40,14 +40,14 @@ public class InscripcionService {
                 .map(InscripcionResponseDTO::new);
     }
 
-    private boolean pagoVigente(Inscripcion inscripcion) {
+   /*  private boolean pagoVigente(Inscripcion inscripcion) {
 
         if (inscripcion.getFechaVencimiento() == null) {
             return false;
         }
 
         return LocalDate.now().isBefore(inscripcion.getFechaVencimiento());
-    }
+    }*/
 
     // FIX PRINCIPAL: ahora devuelve DTOs con estado calculado
     public List<InscripcionResponseDTO> obtenerInscripcionesCliente(Long clienteId) {

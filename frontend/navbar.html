@@ -92,41 +92,52 @@
 <body>
 
   <!-- Menú -->
-  <nav class="navbar">
+<nav class="navbar">
     <ul>
-      <li><a href="panel1.html">Inicio</a></li>
-      <li>
-        <a href="#">Clientes</a>
-        <ul>
-          <li><a href="MatricularUsuario.html">Añadir nuevo</a></li>
-          <li><a href="ClientesActivos.html">Seguimiento de cliente</a></li>
-          <li><a href="DarDeBaja.html">Dar de baja</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Inscripciones</a>
-        <ul>
-          <li><a href="NuevaInscripcion.html">Crear inscripción</a></li>
-          <!-- <li><a href="InscripcionesActivas.html">Inscripciones activas</a></li>
-          <li><a href="InscripcionesInactivas.html">Inscripciones inactivas</a></li> -->
-          <li><a href="Inscripciones.html">Inscripciones</a></li>
-          <li><a href="CancelarInscripcion.html">Cancelar inscripción</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Pagos</a>
-        <ul>
-          <li><a href="NuevoPago.html">Nuevo pago</a></li>
-        </ul>
-        <ul>
-          <li><a href="Estadisticas.html">Estadísticas</a></li>
-        </ul>
-      </li>
+        <li><a href="panel1.html">Inicio</a></li>
+        <li>
+            <a href="#">Clientes</a>
+            <ul>
+                <li><a href="MatricularUsuario.html">Añadir nuevo</a></li>
+                <li><a href="ClientesActivos.html">Seguimiento de cliente</a></li>
+                <li><a href="DarDeBaja.html">Dar de baja</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Inscripciones</a>
+            <ul>
+                <li><a href="NuevaInscripcion.html">Crear inscripción</a></li>
+                <li><a href="Inscripciones.html">Inscripciones</a></li>
+                <li><a href="CancelarInscripcion.html">Cancelar inscripción</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Pagos</a>
+            <ul>
+                <li><a href="NuevoPago.html">Nuevo pago</a></li>
+            </ul>
+        </li>
+        <li id="menuEstadisticas"><a href="Estadisticas.html">Estadísticas</a></li>
+        <li id="menuUsuarios"><a href="Usuarios.html">Usuarios</a></li>
+        <li><a href="#" id="btnCerrarSesion">Cerrar sesión</a></li>
     </ul>
-  </nav>
+</nav>
 
+<script type="module">
+    import { obtenerRole, cerrarSesion } from './js/config.js';
 
-  <!-- Si son varias páginas, simplemente reemplazá cada href="archivo.html" con el nombre real de tu archivo. -->
+    const role = obtenerRole();
+
+    if (role !== "ADMIN") {
+        document.getElementById("menuEstadisticas").style.display = "none";
+        document.getElementById("menuUsuarios").style.display = "none";
+    }
+
+    document.getElementById("btnCerrarSesion").addEventListener("click", (e) => {
+        e.preventDefault();
+        cerrarSesion();
+    });
+</script>
 
 </body>
 </html>

@@ -94,15 +94,7 @@
 
     </main>
 
-  <script>
-    // Cargar el navbar desde navbar.html
-    fetch("navbar.html")
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("navbar").innerHTML = data;
-      })
-      .catch(err => console.error("Error cargando navbar:", err));
-  </script>
+<script type="module" src="js/navbar-loader.js"></script>
 
   <script  type="module" src="./js/darDeBajaInscripcion.js"> </script>
 

@@ -7,58 +7,13 @@
 
     <title>Matricular usuario</title>
 
-    <style>
-        /* Quitamos márgenes que pone el navegador */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Toda la pantalla */
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            background-color: #f1f1f1;
-        }
-
-        .toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-20px);
-            padding: 14px 24px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            z-index: 1000;
-        }
-
-        .toast.mostrar {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .toast.exito {
-            background-color: #2e7d32;
-        }
-
-        .toast.error {
-            background-color: #c62828;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/global.css">
 </head>
-
 
 <body>
 
     <!-- Aquí se inyectará el navbar -->
     <div id="navbar"></div>
-
 
     <!-- =========================
          FORMULARIO
@@ -71,27 +26,22 @@
         <br>
         <h2>Complete el formulario</h2>
 
-
         <form>
             <fieldset>
                 <legend>Matricular usuario</legend>
-
 
                 <div class="campo">
                     <label for="nombre">NOMBRE:</label>
                     <input type="text" id="nombre" name="nombre">
                 </div>
 
-
                 <div class="campo">
                     <label for="apellido">APELLIDO:</label>
                     <input type="text" id="apellido" name="apellido">
                 </div>
 
-
                 <div class="campo">
                     <label for="fechaNacimiento">FECHA DE NACIMIENTO:</label>
-
                     <input type="date" id="fechaNacimiento" name="fechaNacimiento">
                 </div>
 
@@ -105,44 +55,29 @@
                     <input type="tel" id="celular" name="celular">
                 </div>
 
-
                 <div class="campo">
                     <label for="domicilio">DIRECCIÓN:</label>
                     <input type="text" id="domicilio" name="domicilio">
                 </div>
-
 
                 <div class="campo">
                     <label for="lesion">LESIÓN:</label>
                     <input type="text" id="lesion" name="lesion">
                 </div>
 
-
-
             </fieldset>
         </form>
 
         <button id="btnMatricular" class="btn-matricular">Matricular usuario</button>
 
-
-
     </main>
+
+    <div id="toast" class="toast"></div>
 
     <!-- conecto con el backend y bdd -->
     <script type="module" src="js/clientes.js"></script>
     <script type="module" src="js/config.js"></script>
-
-    <script>
-        // Cargar el navbar desde navbar.html
-        fetch("navbar.html")
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
-            })
-            .catch(err => console.error("Error cargando navbar:", err));
-    </script>
-
-    <div id="toast" class="toast"></div>
+    <script type="module" src="js/navbar-loader.js"></script>
 
 </body>
 

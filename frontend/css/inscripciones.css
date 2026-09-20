@@ -1,0 +1,487 @@
+/* ============================================================
+   GLOBAL.CSS — Sistema de Gestión de Gimnasio
+   Paleta: #454040 / #605B51 / #D8D365 / #E6F082
+   ============================================================ */
+
+:root {
+    --color-oscuro: #454040;
+    --color-medio: #605B51;
+    --color-acento: #D8D365;
+    --color-claro: #E6F082;
+
+    --color-peligro: #b33a3a;
+    --color-peligro-fondo: #f7e3e3;
+    --color-alerta: #c9932e;
+    --color-alerta-fondo: #faf1dd;
+    --color-exito-texto: #4d6b1f;
+    --color-exito-fondo: #eef7d8;
+
+    --texto-principal: var(--color-oscuro);
+    --texto-secundario: #7a7468;
+    --borde: #d9d4c8;
+    --fondo-pagina: #fbfaf6;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--fondo-pagina);
+    color: var(--texto-principal);
+    padding-top: 60px;
+}
+
+h1, h2, h3 {
+    color: var(--color-oscuro);
+    font-weight: 700;
+}
+
+h1 { font-size: 1.8em; margin-bottom: 4px; }
+h2 { font-size: 1.3em; margin-top: 28px; }
+
+a {
+    color: var(--color-medio);
+}
+
+/* ============================================================
+   NAVBAR (horizontal, con submenús desplegables)
+   ============================================================ */
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-oscuro);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a {
+    display: block;
+    padding: 14px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95em;
+}
+
+.navbar a:hover {
+    background-color: var(--color-medio);
+}
+
+.navbar ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-medio);
+    min-width: 190px;
+    flex-direction: column;
+}
+
+.navbar ul ul li a {
+    padding: 10px 16px;
+}
+
+.navbar ul ul li a:hover {
+    background-color: #4f4a41;
+}
+
+.navbar li:hover > ul {
+    display: flex;
+}
+
+/* Botón de cerrar sesión, destacado dentro del navbar */
+#btnCerrarSesion {
+    color: var(--color-claro);
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    .navbar li {
+        width: 100%;
+    }
+    .navbar ul ul {
+        position: static;
+        min-width: 0;
+    }
+}
+
+/* ============================================================
+   FORMULARIOS
+   ============================================================ */
+
+.formulario {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+fieldset {
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    background-color: #ffffff;
+}
+
+legend {
+    padding: 0 8px;
+    font-weight: 700;
+    color: var(--color-oscuro);
+}
+
+.campo {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.campo label {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="tel"],
+input[type="password"],
+select {
+    padding: 9px 12px;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    font-size: 0.95em;
+    background-color: #fff;
+    color: var(--texto-principal);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 3px rgba(216, 211, 101, 0.35);
+}
+
+label {
+    font-size: 0.9em;
+}
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Botón primario (acción principal: guardar, registrar, crear) */
+button,
+.btn-matricular,
+#btnBuscar,
+#btnRegistrarPago,
+#btnGuardar,
+#btnConfirmarPagoFicha,
+#btnCrearUsuario,
+#btnLogin {
+    background-color: var(--color-acento);
+    color: var(--color-oscuro);
+}
+
+button:hover,
+.btn-matricular:hover,
+#btnBuscar:hover,
+#btnRegistrarPago:hover,
+#btnGuardar:hover,
+#btnConfirmarPagoFicha:hover,
+#btnCrearUsuario:hover,
+#btnLogin:hover {
+    background-color: #c9c455;
+}
+
+/* Botón secundario (navegación, seleccionar, ver pagos) */
+.btn-seleccionar,
+.btn-ver-pagos,
+.btn-editar,
+#btnActivos,
+#btnInactivos,
+#anterior,
+#siguiente {
+    background-color: #efece0;
+    color: var(--color-oscuro);
+    border: 1px solid var(--borde);
+}
+
+.btn-seleccionar:hover,
+.btn-ver-pagos:hover,
+.btn-editar:hover,
+#btnActivos:hover,
+#btnInactivos:hover,
+#anterior:hover:not(:disabled),
+#siguiente:hover:not(:disabled) {
+    background-color: var(--color-claro);
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Botón de PELIGRO: cancelar, eliminar, dar de baja — visible a propósito */
+.btn-peligro,
+.btn-baja-usuario,
+.btn-cancelar,
+#btnDarDeBaja,
+#btnCancelarInscripcion {
+    background-color: var(--color-peligro);
+    color: #ffffff;
+}
+
+.btn-peligro:hover,
+.btn-baja-usuario:hover,
+.btn-cancelar:hover,
+#btnDarDeBaja:hover,
+#btnCancelarInscripcion:hover {
+    background-color: #942e2e;
+}
+
+/* Botón de tipo de entrenamiento (Estadísticas) */
+.btn-tipo-entrenamiento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #f7f6f0;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.95em;
+    color: var(--texto-principal);
+}
+
+.btn-tipo-entrenamiento:hover {
+    background-color: var(--color-claro);
+    border-color: var(--color-acento);
+}
+
+.btn-tipo-entrenamiento .porcentaje {
+    font-weight: 700;
+    color: var(--color-medio);
+}
+
+/* ============================================================
+   TABLAS
+   ============================================================ */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: var(--color-oscuro);
+}
+
+th {
+    color: #ffffff;
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0eee6;
+    font-size: 0.92em;
+}
+
+tbody tr:hover {
+    background-color: var(--color-claro);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============================================================
+   BADGES DE ESTADO DE PAGO
+   ============================================================ */
+
+.badge-estado {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
+.badge-al-dia {
+    background-color: var(--color-exito-fondo);
+    color: var(--color-exito-texto);
+}
+
+.badge-por-vencer {
+    background-color: var(--color-alerta-fondo);
+    color: var(--color-alerta);
+}
+
+.badge-vencida {
+    background-color: var(--color-peligro-fondo);
+    color: var(--color-peligro);
+}
+
+/* ============================================================
+   TARJETAS DE MÉTRICAS (Estadísticas)
+   ============================================================ */
+
+.tarjetas-resumen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.tarjeta {
+    background-color: #ffffff;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 3px rgba(69, 64, 64, 0.08);
+    flex: 1 1 200px;
+    min-width: 180px;
+    transition: box-shadow 0.15s ease;
+}
+
+.tarjeta:hover {
+    box-shadow: 0 3px 10px rgba(69, 64, 64, 0.15);
+}
+
+.tarjeta-numero {
+    display: block;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--color-oscuro);
+    line-height: 1.1;
+}
+
+.tarjeta-etiqueta {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.85em;
+    color: var(--texto-secundario);
+}
+
+.tarjeta-icono {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.icono-acento { background-color: #f4f2d9; color: #7a763a; }
+.icono-claro  { background-color: var(--color-claro); color: #5c6b1f; }
+.icono-medio  { background-color: #e7e5df; color: var(--color-medio); }
+.icono-alerta { background-color: var(--color-peligro-fondo); color: var(--color-peligro); }
+
+.tarjeta-detalle {
+    background-color: #ffffff;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 16px;
+}
+
+.tarjeta-detalle h2 {
+    margin-top: 0;
+}
+
+/* ============================================================
+   TOAST (notificaciones flotantes)
+   ============================================================ */
+
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    padding: 14px 24px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 700;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2000;
+}
+
+.toast.mostrar {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast.exito {
+    background-color: #5c7a2b;
+}
+
+.toast.error {
+    background-color: var(--color-peligro);
+}
+
+
+
+
+/*
+
+Puse selectores por id para algunos botones (#btnBuscar, #btnGuardar, etc.) para no obligarte a agregar clases nuevas a botones que ya existen en tu HTML — pero si en algún archivo el id es distinto al que vimos hasta ahora, ese botón no va a tomar el estilo. Si querés algo más prolijo, lo ideal a futuro es agregar class="btn-primario" o class="btn-peligro" explícitamente en el HTML en vez de depender de IDs.
+Agregué clases de peligro (.btn-peligro, .btn-cancelar, .btn-baja-usuario) que ya vas a poder usar tal cual en botones nuevos que crees (por ejemplo, si armás el botón de "Cancelar inscripción" o "Dar de baja cliente" que vi que tenés como páginas pero no llegamos a revisar el JS todavía).
+Si tenías estilos custom en el HTML de EditarUsuario.html (el <style> inline con .toast, body { display: flex }, etc.), ese <style> embebido va a pisar lo que puse acá si están en conflicto — te recomiendo sacar ese <style> inline de EditarUsuario.html ahora que global.css ya cubre .toast y el layout general.
+
+¿Querés que revise algún archivo puntual para sacarle estilos inline que quedaron sueltos y ya están cubiertos acá?
+
+
+*/
+
+
