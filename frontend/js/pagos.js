@@ -1,4 +1,5 @@
 import { PAGOS_URL, CLIENTES_URL, INSCRIPCIONES_URL, apiFetch, protegerPagina } from './config.js';
+protegerPagina();
 // VARIABLES
 
 let clienteActual = null;
@@ -110,7 +111,6 @@ function mostrarInscripciones(inscripciones) {
             ? `<span>YA PAGADA</span>`
             : `<button type="button" class="btn-seleccionar" data-id="${inscripcion.id}">Seleccionar</button>`;
 
-
         fila.innerHTML = `
             <td>${inscripcion.tipoEntrenamiento}</td>
             <td>${inscripcion.fechaInicio}</td>
@@ -160,7 +160,6 @@ tablaInscripciones.addEventListener(
         // Ponemos la fecha actual
         ponerFechaActual();
         // Marcamos visualmente la fila
-
         document
             .querySelectorAll(".btn-seleccionar")
             .forEach(boton => {
@@ -237,13 +236,13 @@ async function registrarPago() {
     // POST
 
     try {
-        const response = await fetch(PAGOS_URL, {
+        const response = await apiFetch(PAGOS_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(pago)
         });
 
-        const data = await response.json();
+        const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
             throw new Error(data.mensaje || "Error al registrar el pago");

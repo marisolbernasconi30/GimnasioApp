@@ -49,16 +49,13 @@ public class EstadisticaService {
 
         // Clientes nuevos del mes
         long totalClientes = clienteRepository.count();
+        
         long clientesNuevos = clienteRepository.countByFechaAltaClienteBetween(inicioMes, finMes);
-        dto.setPorcentajeClienteNuevo(
-                totalClientes == 0 ? 0 : (clientesNuevos * 100.0) / totalClientes
-        );
+        dto.setCantidadClienteNuevo(clientesNuevos);
 
         // Clientes dados de baja en el mes
         long clientesBaja = clienteRepository.countByFechaBajaClienteBetween(inicioMes, finMes);
-        dto.setPorcentajeClientesBaja(
-                totalClientes == 0 ? 0 : (clientesBaja * 100.0) / totalClientes
-        );
+        dto.setCantidadClientesBaja(clientesBaja);
 
         // Recaudación del mes
         Double total = pagoRepository.sumarRecaudacionEntreFechas(inicioMes, finMes);

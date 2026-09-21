@@ -26,11 +26,8 @@ async function cargarEstadisticas() {
 
         const datos = await respuesta.json();
 
-        document.getElementById("porcentajeNuevos").textContent =
-            datos.porcentajeClienteNuevo.toFixed(1) + "%";
-
-        document.getElementById("porcentajeBaja").textContent =
-            datos.porcentajeClientesBaja.toFixed(1) + "%";
+        document.getElementById("porcentajeNuevos").textContent = datos.cantidadClienteNuevo;
+        document.getElementById("porcentajeBaja").textContent = datos.cantidadClientesBaja;
 
         document.getElementById("totalRecaudado").textContent =
             datos.totalRecaudado.toLocaleString("es-AR");

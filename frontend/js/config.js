@@ -27,13 +27,13 @@ export function obtenerRole() {
 export function cerrarSesion() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    window.location.href = "Login.html";
+    window.location.href = "index.html";
 }
 
 // Redirige al login si no hay token. Llamar al principio de CADA página protegida.
 export function protegerPagina() {
     if (!obtenerToken()) {
-        window.location.href = "Login.html";
+        window.location.href = "index.html";
     }
 }
 

@@ -7,8 +7,8 @@ public class EstadisticasDTO {
 
 
     private Map<String, Double> porcentajePorTipoEntrenamiento; // ej: {"CROSSFIT": 32.5, "YOGA": 18.0, ...}
-    private double porcentajeClientesNuevos;
-    private double porcentajeClientesBaja;
+    private long cantidadClienteNuevo;
+    private long cantidadClientesBaja;
     private double totalRecaudado;
 
     //getters y setters 
@@ -20,17 +20,17 @@ public class EstadisticasDTO {
         this.porcentajePorTipoEntrenamiento = porcentajePorTipoEntrenamiento;
     }
     
-    public double getPorcentajeClienteNuevo(){
-        return porcentajeClientesNuevos;
+    public long getCantidadClienteNuevo(){
+        return cantidadClienteNuevo;
     }
-    public void setPorcentajeClienteNuevo(double porcentajeClientesNuevos){
-        this.porcentajeClientesNuevos = porcentajeClientesNuevos;
+    public void setCantidadClienteNuevo(long cantidadClienteNuevo){
+        this.cantidadClienteNuevo = cantidadClienteNuevo;
     }
-    public double getPorcentajeClientesBaja(){
-        return porcentajeClientesBaja;
+    public long getCantidadClientesBaja(){
+        return cantidadClientesBaja;
     }
-    public void setPorcentajeClientesBaja(double porcentajeClientesBaja){
-        this.porcentajeClientesBaja = porcentajeClientesBaja;
+    public void setCantidadClientesBaja(long cantidadClientesBaja){
+        this.cantidadClientesBaja = cantidadClientesBaja;
     }
 
     public double getTotalRecaudado(){
