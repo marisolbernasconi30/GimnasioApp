@@ -40,6 +40,8 @@ public class User implements UserDetails {
                                  // numero, si se cambia el orden de los enums, se rompe la aplicacion
     Role role;
 
+    @Column(unique = true)
+    private String email;
     private boolean activo = true;
 
     // -------------------------------------------------------
@@ -48,12 +50,13 @@ public class User implements UserDetails {
 
     // Constructor sin ID (buena práctica)
     @Builder
-    public User(String username, String firstname, String lastname, String password, Role role) {
+    public User(String username, String firstname, String lastname, String password, Role role, String email) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.role = role;
+        this.email = email;
 
     }
 
@@ -105,6 +108,14 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public boolean isActivo() {
         return activo;
     }
@@ -141,7 +152,7 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return activo; // para que la cuenta no este deshabilitada, ya que si esta deshabilitada, el
-                     // usuario no puede loguearse
+                       // usuario no puede loguearse
     }
 
     @Override

@@ -35,7 +35,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(authRequest -> authRequest
-                .requestMatchers("/auth/login").permitAll() // solo login es público
+                .requestMatchers("/auth/login", "/auth/forgot-password", "/auth/reset-password").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(sessionManager -> sessionManager

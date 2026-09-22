@@ -9,5 +9,5 @@ import com.example.demo.entity.login.User;
 public interface UserRepository extends JpaRepository<User, Long>  {
      public Optional<User> findByUsername (String username);
 
-    
+    Optional<User> findByEmail(String email); 
 }

@@ -96,7 +96,13 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-test</artifactId>
     <scope>test</scope>
-</dependency>
+    </dependency>
+
+    <!-- MAIL-->
+    <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
 
 <!-- Para testear cosas de Security específicamente (mockear autenticación, etc.) -->
 <dependency>

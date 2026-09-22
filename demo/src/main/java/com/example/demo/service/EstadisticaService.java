@@ -48,7 +48,7 @@ public class EstadisticaService {
         dto.setPorcentajePorTipoEntrenamiento(porcentajes);
 
         // Clientes nuevos del mes
-        long totalClientes = clienteRepository.count();
+        //long totalClientes = clienteRepository.count();
         
         long clientesNuevos = clienteRepository.countByFechaAltaClienteBetween(inicioMes, finMes);
         dto.setCantidadClienteNuevo(clientesNuevos);
