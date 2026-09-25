@@ -31,7 +31,7 @@ async function login() {
 
         guardarSesion(data.token, role);
 
-        window.location.href = "panel1.html"; // ajustá al nombre real de tu página de inicio
+        window.location.href = "panel1.html"; 
 
     } catch (error) {
         console.error(error);
