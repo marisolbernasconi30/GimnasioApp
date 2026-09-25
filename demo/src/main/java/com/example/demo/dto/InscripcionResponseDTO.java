@@ -23,7 +23,7 @@ public class InscripcionResponseDTO {
 
     private boolean activa; // sigue existiendo: significa "no cancelada"
     private EstadoPago estadoPago; // NUEVO: reemplaza a "pagada"
-    
+
     public InscripcionResponseDTO(Inscripcion inscripcion) {
 
         this.id = inscripcion.getId();
@@ -40,62 +40,77 @@ public class InscripcionResponseDTO {
 
         this.activa = inscripcion.isActiva();
         this.estadoPago = PagoEstadoCalculator.calcular(
-                inscripcion.getFechaVencimiento(), LocalDate.now()
-        );
+                inscripcion.getFechaVencimiento(), LocalDate.now());
     }
-
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getNombreCliente() {
         return nombreCliente;
-    }  
-    public void setNombreCliente (String nombreCliente){
+    }
+
+    public void setNombreCliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
+
     public String getApellidoCliente() {
         return apellidoCliente;
     }
+
     public void setApellidoCliente(String apellidoCliente) {
         this.apellidoCliente = apellidoCliente;
     }
+
     public String getDni() {
         return dni;
     }
+
     public void setDni(String dni) {
         this.dni = dni;
     }
+
     public TipoEntrenamiento getTipoEntrenamiento() {
         return tipoEntrenamiento;
     }
+
     public void setTipoEntrenamiento(TipoEntrenamiento tipoEntrenamiento) {
         this.tipoEntrenamiento = tipoEntrenamiento;
     }
+
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
+
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
+
     public LocalDate getFechaVencimiento() {
         return fechaVencimiento;
     }
+
     public void setFechaVencimiento(LocalDate fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
+
     public LocalDate getFechaBaja() {
         return fechaBaja;
     }
+
     public void setFechaBaja(LocalDate fechaBaja) {
         this.fechaBaja = fechaBaja;
     }
+
     public boolean isActiva() {
         return activa;
     }
+
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
@@ -103,7 +118,8 @@ public class InscripcionResponseDTO {
     public EstadoPago getEstadoPago() {
         return estadoPago;
     }
-    public void setEstadoPago(EstadoPago estadoPago){
+
+    public void setEstadoPago(EstadoPago estadoPago) {
     }
 
 }

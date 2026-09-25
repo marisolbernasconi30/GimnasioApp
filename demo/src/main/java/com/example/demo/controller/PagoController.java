@@ -34,17 +34,5 @@ public class PagoController {
     }
 
 
-    // GET /pagos/inscripcion/{id}
-    // ver pagos de una inscripción
-    //@GetMapping("/inscripcion/{id}")
-    //public List<Pago> pagosPorInscripcion(@PathVariable Long id){
-    //    return pagoService.pagosPorInscripcion(id);
-   // }
-
-
-   //---------------------------------------
-
-  
-    //--------------------------------------------------
 
 }

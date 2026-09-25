@@ -3,9 +3,8 @@ package com.example.demo.dto.login;
 import com.example.demo.entity.enums.login.Role;
 import com.example.demo.entity.login.User;
 
-
 public class UserResponseDTO {
-     private Long id;
+    private Long id;
     private String username;
     private String firstname;
     private String lastname;
@@ -22,10 +21,27 @@ public class UserResponseDTO {
     }
 
     // getters
-    public Long getId() { return id; }
-    public String getUsername() { return username; }
-    public String getFirstname() { return firstname; }
-    public String getLastname() { return lastname; }
-    public Role getRole() { return role; }
-    public boolean isActivo() { return activo; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
 }
