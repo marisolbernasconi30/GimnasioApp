@@ -469,19 +469,3 @@ tbody tr:last-child td {
 .toast.error {
     background-color: var(--color-peligro);
 }
-
-
-
-
-/*
-
-Puse selectores por id para algunos botones (#btnBuscar, #btnGuardar, etc.) para no obligarte a agregar clases nuevas a botones que ya existen en tu HTML — pero si en algún archivo el id es distinto al que vimos hasta ahora, ese botón no va a tomar el estilo. Si querés algo más prolijo, lo ideal a futuro es agregar class="btn-primario" o class="btn-peligro" explícitamente en el HTML en vez de depender de IDs.
-Agregué clases de peligro (.btn-peligro, .btn-cancelar, .btn-baja-usuario) que ya vas a poder usar tal cual en botones nuevos que crees (por ejemplo, si armás el botón de "Cancelar inscripción" o "Dar de baja cliente" que vi que tenés como páginas pero no llegamos a revisar el JS todavía).
-Si tenías estilos custom en el HTML de EditarUsuario.html (el <style> inline con .toast, body { display: flex }, etc.), ese <style> embebido va a pisar lo que puse acá si están en conflicto — te recomiendo sacar ese <style> inline de EditarUsuario.html ahora que global.css ya cubre .toast y el layout general.
-
-¿Querés que revise algún archivo puntual para sacarle estilos inline que quedaron sueltos y ya están cubiertos acá?
-
-
-*/
-
-
