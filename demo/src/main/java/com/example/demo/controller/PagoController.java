@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.dto.PagoDTO;
+import com.example.demo.dto.PagoDetalleDTO;
 import com.example.demo.entity.Pago;
 import com.example.demo.service.PagoService;
 
@@ -33,6 +35,10 @@ public class PagoController {
         return pagoService.pagosPorInscripcion(id);
     }
 
-
+@GetMapping("/mes")
+@PreAuthorize("hasAuthority('ADMIN')")
+public List<PagoDetalleDTO> listarDetalleMes() {
+    return pagoService.listarDetalleMes();
+}
 
 }

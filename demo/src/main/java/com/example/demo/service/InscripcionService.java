@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.dto.InscripcionDTO;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Inscripcion;
@@ -40,16 +39,7 @@ public class InscripcionService {
                 .map(InscripcionResponseDTO::new);
     }
 
-   /*  private boolean pagoVigente(Inscripcion inscripcion) {
-
-        if (inscripcion.getFechaVencimiento() == null) {
-            return false;
-        }
-
-        return LocalDate.now().isBefore(inscripcion.getFechaVencimiento());
-    }*/
-
-    // FIX PRINCIPAL: ahora devuelve DTOs con estado calculado
+    // ahora devuelve DTOs con estado calculado
     public List<InscripcionResponseDTO> obtenerInscripcionesCliente(Long clienteId) {
         return inscripcionRepository.findByClienteId(clienteId).stream()
                 .map(InscripcionResponseDTO::new)
@@ -58,20 +48,17 @@ public class InscripcionService {
 
     // -------------------------------------
 
-public List<InscripcionResponseDTO> listarActivasPorTipo(TipoEntrenamiento tipo) {
-    return inscripcionRepository.findByTipoEntrenamientoAndActivaTrue(tipo).stream()
-            .map(InscripcionResponseDTO::new)
-            .toList();
-}
+    public List<InscripcionResponseDTO> listarActivasPorTipo(TipoEntrenamiento tipo) {
+        return inscripcionRepository.findByTipoEntrenamientoAndActivaTrue(tipo).stream()
+                .map(InscripcionResponseDTO::new)
+                .toList();
+    }
 
-public List<InscripcionResponseDTO> listarInactivasPorTipo(TipoEntrenamiento tipo) {
-    return inscripcionRepository.findByTipoEntrenamientoAndActivaFalse(tipo).stream()
-            .map(InscripcionResponseDTO::new)
-            .toList();
-}
-
-
-    // -------------------------------------
+    public List<InscripcionResponseDTO> listarInactivasPorTipo(TipoEntrenamiento tipo) {
+        return inscripcionRepository.findByTipoEntrenamientoAndActivaFalse(tipo).stream()
+                .map(InscripcionResponseDTO::new)
+                .toList();
+    }
 
     // para cancelar la inscripcion
     public Inscripcion cancelar(Long id) {
@@ -79,6 +66,17 @@ public List<InscripcionResponseDTO> listarInactivasPorTipo(TipoEntrenamiento tip
                 .orElseThrow(() -> new RuntimeException("Inscripcion no encontrada"));
         inscripcion.setActiva(false);
         inscripcion.setFechaBaja(LocalDate.now());
+        return inscripcionRepository.save(inscripcion);
+    }
+
+    public Inscripcion reactivar(Long id) {
+
+        Inscripcion inscripcion = inscripcionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Inscripción no encontrada"));
+
+        inscripcion.setActiva(true);
+        inscripcion.setFechaBaja(null);
+
         return inscripcionRepository.save(inscripcion);
     }
 

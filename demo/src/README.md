@@ -90,7 +90,7 @@ src/main/java/com/example/demo/
 ### Frontend
 
 1. Abrí la carpeta del frontend con una extensión de servidor local (por ejemplo, Live Server de VS Code).
-2. Abrí `Login.html` para iniciar sesión.
+2. Abrí `index.html` para iniciar sesión.
 3. Verificá que la URL del backend en `js/config.js` coincida con donde esté corriendo tu servidor (por defecto `http://localhost:8080`).
 
 ## 📌 Endpoints principales

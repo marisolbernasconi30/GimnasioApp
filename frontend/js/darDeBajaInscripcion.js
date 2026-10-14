@@ -91,18 +91,17 @@ function mostrarInscripciones(inscripciones) {
         const estado = inscripcion.activa ? "Activa" : "Inactiva";
 
         fila.innerHTML = `
-            <td>${inscripcion.tipoEntrenamiento}</td>
-            <td>${inscripcion.fechaInicio}</td>
-            <td>${inscripcion.fechaVencimiento ?? "-"}</td>
-            <td>${estado}</td>
-            <td>
-                ${
-                    inscripcion.activa
-                        ? `<button class="btn-peligro btn-dar-de-baja" data-id="${inscripcion.id}">Dar de baja</button>`
-                        : "-"
-                }
-            </td>
-        `;
+    <td>${inscripcion.tipoEntrenamiento}</td>
+    <td>${inscripcion.fechaInicio}</td>
+    <td>${inscripcion.fechaVencimiento ?? "-"}</td>
+    <td>${estado}</td>
+    <td>
+        ${inscripcion.activa
+                ? `<button class="btn-peligro btn-dar-de-baja" data-id="${inscripcion.id}">Dar de baja</button>`
+                : `<button class="btn-reactivar" data-id="${inscripcion.id}">Dar de alta</button>`
+            }
+    </td>
+`;
 
         tablaInscripciones.appendChild(fila);
     });
@@ -141,3 +140,41 @@ document.addEventListener("click", function (event) {
         darDeBajaInscripcion(id);
     }
 });
+document.addEventListener("click", function (event) {
+
+    if (event.target.classList.contains("btn-dar-de-baja")) {
+        const id = event.target.dataset.id;
+        darDeBajaInscripcion(id);
+    }
+
+    if (event.target.classList.contains("btn-reactivar")) {
+        const id = event.target.dataset.id;
+        reactivarInscripcion(id);
+    }
+});
+
+async function reactivarInscripcion(id) {
+
+    const confirmar = confirm("¿Dar de alta esta inscripción nuevamente?");
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+        const respuesta = await apiFetch(`${INSCRIPCIONES_URL}/${id}/reactivar`, {
+            method: "PUT"
+        });
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo reactivar la inscripción");
+        }
+
+        alert("Inscripción reactivada correctamente.");
+        await cargarInscripciones(clienteActual.id);
+
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo reactivar la inscripción.");
+    }
+}

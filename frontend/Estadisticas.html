@@ -33,12 +33,26 @@
                 <span class="tarjeta-etiqueta">Bajas este mes</span>
             </div>
 
-            <div class="tarjeta">
+            <div class="tarjeta" id="tarjetaRecaudado" style="cursor: pointer;">
                 <span class="tarjeta-icono icono-azul">💰</span>
                 <span class="tarjeta-numero" id="totalRecaudado">—</span>
-                <span class="tarjeta-etiqueta">Recaudado este mes</span>
+                <span class="tarjeta-etiqueta">Recaudado este mes (clic para ver detalle)</span>
             </div>
 
+        </div>
+
+        <br>
+
+        <div class="tarjeta-detalle" id="detallePagos" style="display: none;">
+            <h2>Pagos del mes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Detalle del pago</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaDetallePagos"></tbody>
+            </table>
         </div>
 
         <br>
@@ -69,7 +83,7 @@
 
     <script type="module" src="js/estadisticas.js"></script>
 
- <script type="module" src="js/navbar-loader.js"></script>
+    <script type="module" src="js/navbar-loader.js"></script>
 
 </body>
 

@@ -23,9 +23,10 @@ public class JwtService {
 
         Map<String, Object> extraClaims = new HashMap<>();
 
-        if (user instanceof User u) { // NUEVO: si es tu entidad User, le agregamos el rol
-            extraClaims.put("role", u.getRole().name());
-        }
+      if (user instanceof User u) {
+        extraClaims.put("role", u.getRole().name());
+        extraClaims.put("firstname", u.getfirstname()); // ← esta línea es la única nueva
+    }
 
         return getToken(extraClaims, user);
     }

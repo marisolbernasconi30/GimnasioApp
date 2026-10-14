@@ -1,4 +1,4 @@
-import { obtenerRole, cerrarSesion } from './config.js';
+import { obtenerRole, obtenerNombre, cerrarSesion } from './config.js';
 
 fetch("navbar.html")
     .then(res => res.text())
@@ -23,6 +23,14 @@ fetch("navbar.html")
                 e.preventDefault();
                 cerrarSesion();
             });
+        }
+         //  mensaje de bienvenida (solo existe en panel1.html)
+        const mensajeBienvenida = document.getElementById("mensajeBienvenida");
+        if (mensajeBienvenida) {
+            const etiquetaRol = { ADMIN: "administrador", USER: "recepcionista" };
+            const nombre = obtenerNombre();
+            mensajeBienvenida.textContent =
+                `¡Bienvenido/a ${etiquetaRol[role] ?? ""} ${nombre}! 🌟`;
         }
     })
     .catch(err => console.error("Error cargando navbar:", err));

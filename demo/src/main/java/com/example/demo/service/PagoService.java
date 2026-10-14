@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import com.example.demo.dto.PagoDTO;
+import com.example.demo.dto.PagoDetalleDTO;
 import com.example.demo.entity.Inscripcion;
 import com.example.demo.entity.Pago;
 import com.example.demo.entity.enums.EstadoPago;
@@ -13,7 +14,6 @@ import com.example.demo.repository.InscripcionRepository;
 import com.example.demo.repository.PagoRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 public class PagoService {
 
@@ -21,41 +21,53 @@ public class PagoService {
     private final InscripcionRepository inscripcionRepository;
 
     public PagoService(PagoRepository pagoRepository,
-                       InscripcionRepository inscripcionRepository) {
+            InscripcionRepository inscripcionRepository) {
 
         this.pagoRepository = pagoRepository;
         this.inscripcionRepository = inscripcionRepository;
     }
 
- @Transactional
+    @Transactional
     public Pago crear(PagoDTO dto) {
 
-    Inscripcion inscripcion = inscripcionRepository.findById(dto.getInscripcionId())
-            .orElseThrow(() -> new InscripcionNoEncontradaException(dto.getInscripcionId()));
+        Inscripcion inscripcion = inscripcionRepository.findById(dto.getInscripcionId())
+                .orElseThrow(() -> new InscripcionNoEncontradaException(dto.getInscripcionId()));
 
-    EstadoPago estado = PagoEstadoCalculator.calcular(
-            inscripcion.getFechaVencimiento(), dto.getFechaPago()
-    );
+        if (!inscripcion.isActiva()) {
+            throw new PagoInvalidoException(
+                    "Esta inscripción está dada de baja. Reactivala antes de registrar un pago.");
+        }
+        EstadoPago estado = PagoEstadoCalculator.calcular(
+                inscripcion.getFechaVencimiento(), dto.getFechaPago());
 
-    if (estado == EstadoPago.AL_DIA) {
-        throw new PagoInvalidoException(
-                "La inscripción está al día. Se puede volver a pagar desde " +
-                inscripcion.getFechaVencimiento().minusDays(7)
-        );
+        if (estado == EstadoPago.AL_DIA) {
+            throw new PagoInvalidoException(
+                    "La inscripción está al día. Se puede volver a pagar desde " +
+                            inscripcion.getFechaVencimiento().minusDays(7));
+        }
+
+        LocalDate nuevaFechaVencimiento = dto.getFechaPago().plusMonths(1);
+        inscripcion.setFechaVencimiento(nuevaFechaVencimiento);
+        inscripcionRepository.save(inscripcion);
+
+        Pago pago = new Pago(inscripcion, dto.getFechaPago(), dto.getMonto(), dto.getMetodoPago());
+        return pagoRepository.save(pago);
     }
 
-    LocalDate nuevaFechaVencimiento = dto.getFechaPago().plusMonths(1);
-    inscripcion.setFechaVencimiento(nuevaFechaVencimiento);
-    inscripcionRepository.save(inscripcion);
+    public List<PagoDetalleDTO> listarDetalleMes() {
 
-    Pago pago = new Pago(inscripcion, dto.getFechaPago(), dto.getMonto(), dto.getMetodoPago());
-    return pagoRepository.save(pago);
-}
+        LocalDate hoy = LocalDate.now();
+        LocalDate inicioMes = hoy.withDayOfMonth(1);
+        LocalDate finMes = hoy.withDayOfMonth(hoy.lengthOfMonth());
+
+        return pagoRepository.findByFechaPagoBetween(inicioMes, finMes).stream()
+                .map(PagoDetalleDTO::new)
+                .toList();
+    }
 
     // listar pagos de una inscripcion FILTRAR POR ID DE ESA INSCRIPCION
-    public List<Pago> pagosPorInscripcion(Long inscripcionId){
+    public List<Pago> pagosPorInscripcion(Long inscripcionId) {
         return pagoRepository.findByInscripcionId(inscripcionId);
     }
 
-    
 }

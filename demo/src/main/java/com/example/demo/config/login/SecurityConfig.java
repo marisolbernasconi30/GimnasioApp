@@ -13,11 +13,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 import com.example.demo.jwt.JwtAuthenticationFilter;
-
 import lombok.RequiredArgsConstructor;
-
 
 @Configuration
 @EnableWebSecurity
@@ -35,7 +32,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(authRequest -> authRequest
-                .requestMatchers("/auth/login", "/auth/forgot-password", "/auth/reset-password").permitAll()
+                .requestMatchers("/auth/login", "/auth/forgot-password", "/auth/reset-password" ).permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(sessionManager -> sessionManager

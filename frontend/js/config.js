@@ -11,9 +11,14 @@ export const AUTH_URL = `${API_URL}/auth`;
 // SESIÓN
 // ---------------------------------------------
 
-export function guardarSesion(token, role) {
+export function guardarSesion(token, role, nombre) {
     localStorage.setItem("token", token);
     localStorage.setItem("role", role);
+    localStorage.setItem("nombre", nombre); // NUEVO
+}
+
+export function obtenerNombre() { // NUEVO
+    return localStorage.getItem("nombre");
 }
 
 export function obtenerToken() {
@@ -27,6 +32,7 @@ export function obtenerRole() {
 export function cerrarSesion() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    localStorage.removeItem("nombre");
     window.location.href = "index.html";
 }
 

@@ -93,5 +93,8 @@ public List<InscripcionResponseDTO> listarPorVencer() {
 public List<InscripcionResponseDTO> listarAlDia() {
     return inscripcionService.listarAlDia();
 }
-
+@PutMapping("/{id}/reactivar")
+public Inscripcion reactivar(@PathVariable Long id) {
+    return inscripcionService.reactivar(id);
+}
 }

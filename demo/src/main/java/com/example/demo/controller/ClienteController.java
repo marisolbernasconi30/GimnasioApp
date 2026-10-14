@@ -9,7 +9,7 @@ import com.example.demo.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
- 
+
 public class ClienteController {
 
     private final ClienteService clienteService;
@@ -67,4 +67,8 @@ public class ClienteController {
         return clienteService.buscarPorDni(dni);
     }
 
+    @PutMapping("/{id}/reactivar")
+    public Cliente reactivar(@PathVariable Long id) {
+        return clienteService.reactivar(id);
+    }
 }

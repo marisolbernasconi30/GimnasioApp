@@ -26,12 +26,11 @@ async function login() {
 
         const data = await respuesta.json();
 
-        // Decodificamos el rol del propio token (JWT), sin llamar a otro endpoint
         const role = obtenerRoleDelToken(data.token);
+        const nombre = obtenerNombreDelToken(data.token);
+        guardarSesion(data.token, role, nombre);
 
-        guardarSesion(data.token, role);
-
-        window.location.href = "panel1.html"; 
+        window.location.href = "panel1.html";
 
     } catch (error) {
         console.error(error);
@@ -45,9 +44,18 @@ function mostrarError(mensaje) {
 }
 
 function obtenerRoleDelToken(token) {
-    // Un JWT tiene 3 partes separadas por ".". La del medio (payload) está en base64.
     const payload = JSON.parse(atob(token.split(".")[1]));
     return payload.role || null;
 }
+
+function obtenerNombreDelToken(token) {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.firstname || "";
+}
+
+document.getElementById("togglePassword").addEventListener("click", () => {
+    const input = document.getElementById("password");
+    input.type = input.type === "password" ? "text" : "password";
+});
 
 btnLogin.addEventListener("click", login);

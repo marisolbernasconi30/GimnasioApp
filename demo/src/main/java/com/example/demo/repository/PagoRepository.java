@@ -21,5 +21,7 @@ Double sumarTotalRecaudado();
 @Query("SELECT SUM(p.monto) FROM Pago p WHERE p.fechaPago BETWEEN :desde AND :hasta")
 Double sumarRecaudacionEntreFechas(@Param("desde") LocalDate desde, @Param("hasta") LocalDate hasta);
 
+List<Pago> findByFechaPagoBetween(LocalDate desde, LocalDate hasta);
+
 
 }

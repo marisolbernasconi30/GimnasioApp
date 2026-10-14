@@ -1,4 +1,4 @@
-import { ESTADISTICAS_URL, INSCRIPCIONES_URL, apiFetch, protegerPagina } from './config.js';
+import { ESTADISTICAS_URL, INSCRIPCIONES_URL, PAGOS_URL , apiFetch, protegerPagina } from './config.js';
 
 protegerPagina();
 
@@ -113,4 +113,45 @@ function mostrarDetalleTipo(tipo, inscripciones) {
 
     document.getElementById("detalleTipo").style.display = "block";
     document.getElementById("detalleTipo").scrollIntoView({ behavior: "smooth" });
+}
+
+document.getElementById("tarjetaRecaudado").addEventListener("click", async () => {
+
+    try {
+        const respuesta = await apiFetch(`${PAGOS_URL}/mes`);
+        if (!respuesta.ok) throw new Error("Error al obtener el detalle de pagos");
+
+        const pagos = await respuesta.json();
+        mostrarDetallePagos(pagos);
+
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo obtener el detalle de pagos");
+    }
+});
+
+function mostrarDetallePagos(pagos) {
+
+    const cuerpo = document.getElementById("tablaDetallePagos");
+    cuerpo.innerHTML = "";
+
+    if (pagos.length === 0) {
+        cuerpo.innerHTML = `<tr><td>No hay pagos registrados este mes.</td></tr>`;
+        document.getElementById("detallePagos").style.display = "block";
+        return;
+    }
+
+    pagos.forEach(pago => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <td>
+                ${pago.nombreCliente} ${pago.apellidoCliente}, DNI ${pago.dni},
+                Entrenamiento ${pago.tipoEntrenamiento}, ${pago.fechaPago}, monto $${pago.monto}
+            </td>
+        `;
+        cuerpo.appendChild(fila);
+    });
+
+    document.getElementById("detallePagos").style.display = "block";
+    document.getElementById("detallePagos").scrollIntoView({ behavior: "smooth" });
 }

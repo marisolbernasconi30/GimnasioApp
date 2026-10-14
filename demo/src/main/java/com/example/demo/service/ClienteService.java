@@ -84,4 +84,15 @@ public class ClienteService {
         return clienteRepository.findByDni(dni)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
     }
+
+    public Cliente reactivar(Long id) {
+
+    Cliente cliente = clienteRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+    cliente.setActivo(true);
+    cliente.setFechaBajaCliente(null);
+
+    return clienteRepository.save(cliente);
+}
 }

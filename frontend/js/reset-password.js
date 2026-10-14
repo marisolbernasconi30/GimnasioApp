@@ -5,6 +5,7 @@ const token = new URLSearchParams(window.location.search).get("token");
 document.getElementById("btnConfirmar").addEventListener("click", async () => {
 
     const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
     const mensaje = document.getElementById("mensaje");
 
     if (!token) {
@@ -14,6 +15,11 @@ document.getElementById("btnConfirmar").addEventListener("click", async () => {
 
     if (!newPassword || newPassword.length < 4) {
         mensaje.textContent = "Ingresá una contraseña válida";
+        return;
+    }
+
+    if (newPassword !== confirmPassword) {
+        mensaje.textContent = "Las contraseñas no coinciden";
         return;
     }
 

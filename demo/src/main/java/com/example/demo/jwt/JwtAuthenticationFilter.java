@@ -10,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +23,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter { //ESTA CLASE
 
     private final JwtService jwtService;
     private final JwtUserDetailsService userDetailsService;
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) //este metodo va a realizar todos los filtros relacionados con el token

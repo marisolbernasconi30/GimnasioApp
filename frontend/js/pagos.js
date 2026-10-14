@@ -73,7 +73,7 @@ const clasesBadge = {
     AL_DIA: "badge-al-dia",
     POR_VENCER: "badge-por-vencer",
     VENCIDA: "badge-vencida"
-}; 
+};
 
 // MOSTRAR INSCRIPCIONES
 
@@ -112,12 +112,13 @@ function mostrarInscripciones(inscripciones) {
             : `<button type="button" class="btn-seleccionar" data-id="${inscripcion.id}">Seleccionar</button>`;
 
         fila.innerHTML = `
-            <td>${inscripcion.tipoEntrenamiento}</td>
-            <td>${inscripcion.fechaInicio}</td>
-            <td>${inscripcion.fechaBaja ?? "-"}</td>
-            <td>${estado}</td>
-            <td>${boton}</td>
-        `;
+    <td>${inscripcion.tipoEntrenamiento}</td>
+    <td>${inscripcion.fechaInicio}</td>
+    <td>${inscripcion.fechaBaja ?? "-"}</td>
+    <td>${estado}</td>
+    <td><button type="button" class="btn-ver-pagos" data-id="${inscripcion.id}">Ver pagos</button></td>
+    <td>${boton}</td>
+`;
         tablaInscripciones.appendChild(fila);
     });
 
@@ -139,32 +140,54 @@ function fechaLocal(fechaString) {
 
 tablaInscripciones.addEventListener(
     "click",
-    function (event) {
+    async function (event) {
 
-        if (
-            !event.target.classList.contains("btn-seleccionar")
-        ) {
+        // CASO 1: VER PAGOS
+        if (event.target.classList.contains("btn-ver-pagos")) {
+
+            const inscripcionId = event.target.dataset.id;
+
+            try {
+                const respuesta = await apiFetch(`${PAGOS_URL}/inscripcion/${inscripcionId}`);
+                if (!respuesta.ok) throw new Error("Error al obtener pagos");
+
+                const pagos = await respuesta.json();
+
+                if (pagos.length === 0) {
+                    alert("Esta inscripción todavía no tiene pagos registrados.");
+                    return;
+                }
+
+                const detalle = pagos
+                    .map(p => `${p.fechaPago} — $${p.monto} (${p.metodoPago})`)
+                    .join("\n");
+
+                alert("Historial de pagos:\n\n" + detalle);
+
+            } catch (error) {
+                console.error(error);
+                alert("No se pudo obtener el historial de pagos");
+            }
+
+            return;
+        }
+
+        // CASO 2: SELECCIONAR INSCRIPCIÓN PARA PAGAR
+        if (!event.target.classList.contains("btn-seleccionar")) {
             return;
         }
 
         const inscripcionId = event.target.dataset.id;
 
-        console.log("Inscripción seleccionada:", inscripcionId);
-
-        // Guardamos solamente el ID
-
         inscripcionSeleccionada = Number(inscripcionId);
-        console.log("ID guardado:", inscripcionSeleccionada);
-        // Mostrar datos del pago
+
         datosPago.style.display = "block";
-        // Ponemos la fecha actual
         ponerFechaActual();
-        // Marcamos visualmente la fila
+
         document
             .querySelectorAll(".btn-seleccionar")
             .forEach(boton => {
-                boton.style.fontWeight =
-                    "normal";
+                boton.style.fontWeight = "normal";
             });
 
         event.target.style.fontWeight = "bold";

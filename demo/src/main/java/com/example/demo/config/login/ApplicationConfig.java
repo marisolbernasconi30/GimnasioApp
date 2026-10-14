@@ -23,7 +23,6 @@ public class ApplicationConfig {
     
     private final UserRepository userRepository;
     
-       
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager(); //esto es solo un ejemplo, en una aplicación real se debería implementar la lógica de autenticación

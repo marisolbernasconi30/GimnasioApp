@@ -71,9 +71,8 @@ function listarClientesInactivos() {
                                 <td>${usuario.domicilio}</td>
                                 <td>${usuario.lesion}</td>
                                 <td>
-                                    <button class="btn-editar" data-id="${usuario.id}">
-                                        Editar
-                                    </button>
+                                    <button class="btn-editar" data-id="${usuario.id}">Editar</button>
+                                    <button class="btn-reactivar-cliente" data-id="${usuario.id}">Dar de alta</button>
                                 </td>   
                             </tr>
                         `;
@@ -152,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btnMatricular.addEventListener("click", crearCliente);
     }
 
-    // BOTÓN EDITAR
+    // BOTÓN EDITAR Y ACTIVAR
     if (tablaUsuarios) {
 
         tablaUsuarios.addEventListener("click", (event) => {
@@ -162,6 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const id = event.target.dataset.id;
                 window.location.href = `EditarUsuario.html?id=${id}`;
             }
+            if (event.target.classList.contains("btn-reactivar-cliente")) {
+            const id = event.target.dataset.id;
+            reactivarCliente(id);
+        }
 
         });
 
@@ -178,4 +181,30 @@ function mostrarToast(mensaje, tipo) {
     setTimeout(() => {
         toast.className = "toast " + tipo;
     }, 3000);
+}
+
+async function reactivarCliente(id) {
+
+    const confirmar = confirm("¿Dar de alta a este cliente nuevamente?");
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+        const respuesta = await apiFetch(`${url}/${id}/reactivar`, {
+            method: "PUT"
+        });
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo reactivar el cliente");
+        }
+
+        mostrarToast("Cliente reactivado correctamente", "exito");
+        listarClientesInactivos();
+
+    } catch (error) {
+        console.error(error);
+        mostrarToast("No se pudo reactivar el cliente", "error");
+    }
 }

@@ -19,98 +19,70 @@
       <!-- Aquí se inyectará el navbar -->
   <div id="navbar"></div>
 
+    <main class="formulario" style="max-width: 600px;">
 
-    <h1>Nueva inscripción</h1>
+        <h1 style="text-align: center;">Nueva inscripción</h1>
 
 
-    <!-- BUSCAR CLIENTE -->
+       <!-- BUSCAR CLIENTE -->
+        <fieldset>
+            <legend>Buscar cliente</legend>
 
-    <label for="dni">
-        DNI del cliente:
-    </label>
+            <div class="campo">
+                <label for="dni">DNI del cliente:</label>
+                <input type="text" id="dni" placeholder="Ingrese DNI">
+            </div>
 
-    <input type="text" id="dni" placeholder="Ingrese DNI">
-
-    <button type="button" id="btnBuscar"> Buscar </button>
-
+            <div class="barra-botones">
+                <button type="button" id="btnBuscar">Buscar</button>
+            </div>
+        </fieldset>
 
     <!-- DATOS DEL CLIENTE -->
 
-    <div id="datosCliente" style="display:none;">
-
-        <h2>Cliente</h2>
-
-        <p>
-            Nombre:
-            <span id="nombreCliente"></span>
-        </p>
-
-        <p>
-            Apellido:
-            <span id="apellidoCliente"></span>
-        </p>
-
-        <p>
-            DNI:
-            <span id="dniCliente"></span>
-        </p>
-
-    </div>
+        <div id="datosCliente" style="display:none;">
+            <fieldset>
+                <legend>Cliente</legend>
+                <p>Nombre: <span id="nombreCliente"></span></p>
+                <p>Apellido: <span id="apellidoCliente"></span></p>
+                <p>DNI: <span id="dniCliente"></span></p>
+            </fieldset>
+        </div>
 
 
     <!-- FORMULARIO -->
+        <div id="formularioInscripcion" style="display:none;">
+            <fieldset>
+                <legend>Crear inscripción</legend>
 
-    <div id="formularioInscripcion" style="display:none;">
+                <div class="campo">
+                    <label for="tipoEntrenamiento">Tipo de entrenamiento:</label>
+                    <select id="tipoEntrenamiento">
+                        <option value="">Seleccione</option>
+                        <option value="MUSCULACION">Musculación</option>
+                        <option value="CARDIO">Cardio</option>
+                        <option value="FUNCIONAL">Funcional</option>
+                        <option value="CROSSFIT">Crossfit</option>
+                        <option value="YOGA">Yoga</option>
+                        <option value="PILATES">Pilates</option>
+                    </select>
+                </div>
 
-        <h2>Crear inscripción</h2>
+                <div class="campo">
+                    <label for="fechaInicio">Fecha de inicio:</label>
+                    <input type="date" id="fechaInicio">
+                </div>
 
-        <label for="tipoEntrenamiento">  Tipo de entrenamiento:  </label>
-
-
-        <select id="tipoEntrenamiento">
-
-            <option value="">
-                Seleccione
-            </option>
-
-            <option value="MUSCULACION">
-                Musculación
-            </option>
-            <option value="CARDIO">
-                Cardio
-            </option>
-            <option value="FUNCIONAL">
-                Funcional
-            </option>
-            <option value="CROSSFIT">
-                Crossfit
-            </option>
-            <option value="YOGA">
-                Yoga
-            </option>
-            <option value="PILATES">
-                Pilates
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <label for="fechaInicio"> Fecha de inicio: </label>
-
-
-        <input type="date" id="fechaInicio">
-
-        <br><br>
-
-        <button type="button" id="btnCrearInscripcion"> Crear inscripción </button>
-
-    </div>
-
+                <div class="barra-botones">
+                    <button type="button" id="btnCrearInscripcion">Crear inscripción</button>
+                </div>
+            </fieldset>
+        </div>
+ </main>
 
     <script type="module" src="js/nuevaInscripcion.js"> </script>
     <script type="module" src="js/navbar-loader.js"></script>
-<script  type="module" src="js/config.js"></script>
+    <script  type="module" src="js/config.js"></script>
 
 </body>
 
