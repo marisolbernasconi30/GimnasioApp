@@ -522,3 +522,10 @@ tbody tr:last-child td {
     gap: 12px;
     margin: 16px 0;
 }
+.welcome {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 1.6em;
+}
